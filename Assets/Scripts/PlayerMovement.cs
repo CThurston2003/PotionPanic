@@ -31,10 +31,9 @@ public class PlayerMovement : MonoBehaviour
     public Camera playerView; //Providing reference to player camera
     public float horiSpeed = 1.0f; //Default horizontal speed of camera
     public float vertSpeed = 1.0f; //Default verticle speed of camera
-    public float hori = Input.GetAxisRaw("Horizontal"); //Horizontal rotation (AKA Yaw)
-    public float vert = Input.GetAxisRaw("Vertical"); //Vert rotation 
-    Vector2 playerViewpoint; //Vector 2 to store player viewpoint x and y
-    Vector3 m_EulerAngleVelocity;
+    public float hori = 0; //Horizontal rotation (AKA Yaw)
+    public float vert = 0; //Vert rotation 
+    //Vector3 m_EulerAngleVelocity;
 
 //move function
     public void onMove(InputAction.CallbackContext context){
@@ -68,7 +67,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         
-        m_EulerAngleVelocity = new Vector3(0, 0, 0);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
     }
 
@@ -77,14 +77,20 @@ public class PlayerMovement : MonoBehaviour
 
         //m_EulerAngleVelocity = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
 
-        Debug.Log(hori);
+        //Debug.Log(hori);
 
-        Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
+        //Quaternion deltaRotation = Quaternion.Euler(m_EulerAngleVelocity * Time.fixedDeltaTime);
 
         playerBody.velocity = playerMove;
-        playerBody.MoveRotation(playerBody.rotation * deltaRotation);
+        //playerBody.MoveRotation(playerBody.rotation * deltaRotation);
 
         //Debug.Log(playerBody.velocity.y);
+
+
+        hori += horiSpeed * Input.GetAxis("Mouse X");
+        vert -= vertSpeed * Input.GetAxis("Mouse Y");
+
+        transform.eulerAngles = new Vector3(vert, hori, 0.0f);
 
     }
 
