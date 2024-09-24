@@ -1,32 +1,33 @@
+//This script is used make the player's "body" follow the players "head"
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class playerFollow : MonoBehaviour
 {
-
-
-    //---------Variables----------
+    
     private PlayerInput playerInput; //creating a variable for the player input object
     private InputAction moveAction; //Creating an InputAction object to reference movements from the player
     private Rigidbody rigidBody; //Creating a rigidBody opject to reference players rigidbody
     public float moveFactor; //The factor that the players movement is multiplied by
-    public float yaw; //Horizontal rotation of players vision
-    public float pitch; //Vertical rotation of players vision
-    public float yawSpeed; //Speed modifier for yaw
-    public float pitchSpeed; //Speed modifier for pitch
+    public Transform playerBody; //Reference to the transform of the player body
+    private InputAction lookAction; //Creating an InputAction object to reference the players view
 
+    //Awake function
     private void Awake(){
 
         //Tying the player input object to the script through this reference
         playerInput = GetComponent<PlayerInput>();
-
+        
         //Referencing the movement actions and tying it to the script
         moveAction = playerInput.actions["Move"];
 
-        //Referencing the players rigidBody
-        rigidBody = GetComponent<Rigidbody>();
+        //Referencing the look actions and tying it to the script
+        lookAction = playerInput.actions["Look"];
+
 
     }
     
@@ -36,23 +37,13 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    
-    //Fixed Update function
+    //Fixed update function
     void FixedUpdate(){
 
-        //Testing references
-        // Vector3 test = new Vector3(20.0f,0.0f,0.0f);
-        // rigidBody.AddForce(test);
+        //Debug.Log(moveAction.ReadValue<Vector2>().x);
 
-        //Code segment for controlling player's first person view
-        yaw += yawSpeed * moveAction.ReadValue<Vector2>().x;
-        pitch -= pitchSpeed * moveAction.ReadValue<Vector2>().y;
-
-        //Debug tests
-        Debug.Log(pitch);
-
-            //Using a transform object to determine where the player is looking
-        transform.eulerAngles = new Vector3(yaw, pitch, 0.0f);
+        Vector3 movement = new Vector3(0f,0f,lookAction.ReadValue<Vector2>().y * moveAction.ReadValue<Vector2>().y);
+        playerBody.Translate(movement, playerBody);
 
     }
     
