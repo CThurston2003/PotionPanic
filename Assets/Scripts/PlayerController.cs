@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         //Using a transform object to determine where the player is looking
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
         
-        //Setting a clamp so the user's view cant go past 90
+        //Setting a clamp so the user's view cant go past 90 (Note, I think Pitch and Yaw are backwards??)
         pitch = Mathf.Clamp(pitch, -90, 90);
 
         //Creating a vector to change the offset of the players head position
