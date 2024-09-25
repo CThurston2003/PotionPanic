@@ -15,7 +15,8 @@ public class playerFollow : MonoBehaviour
     public float moveFactor; //The factor that the players movement is multiplied by
     public Transform playerBody; //Reference to the transform of the player body
     private InputAction lookAction; //Creating an InputAction object to reference the players view
-
+    public float speed = 2f;
+    
     //Awake function
     private void Awake(){
 
@@ -27,6 +28,9 @@ public class playerFollow : MonoBehaviour
 
         //Referencing the look actions and tying it to the script
         lookAction = playerInput.actions["Look"];
+
+        //Tying the player's body's rigidbody to this script
+        rigidBody = GetComponent<Rigidbody>();
 
 
     }
@@ -42,8 +46,27 @@ public class playerFollow : MonoBehaviour
 
         //Debug.Log(moveAction.ReadValue<Vector2>().x);
 
-        Vector3 movement = new Vector3(0f,0f,lookAction.ReadValue<Vector2>().y * moveAction.ReadValue<Vector2>().y);
-        playerBody.Translate(movement, playerBody);
+        // Vector3 movement = new Vector3(moveAction.ReadValue<Vector2>().x * Time.deltaTime,0f,moveAction.ReadValue<Vector2>().y * Time.deltaTime);
+        // //rigidBody.velocity += movement;
+        // rigidBody.velocity = transform.forward * 2 * Time.deltaTime;
+
+        // Debug.Log(transform.forward);
+
+        // Vector3 movement = new Vector3(moveAction.ReadValue<Vector2>().x * Time.deltaTime,0f,moveAction.ReadValue<Vector2>().y * Time.deltaTime);
+
+        // rigidBody.velocity = movement * 100;
+        // //Debug.Log(movement);
+
+
+        // Vector3 Movement = new Vector3 (Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+    
+        // playerBody.transform.position += Movement * 5 * Time.deltaTime;
+        // rigidBody.AddRelativeForce(Vector3.forward * 1, ForceMode.VelocityChange);
+
+        float xMove = Input.GetAxis("Horizontal"); 	//d changes value to 1, a changes value to -1
+	    float zMove = Input.GetAxis("Vertical"); // w key changes value to 1, s key changes value to -1
+
+        transform.position = transform.position + new Vector3(xMove * speed * Time.deltaTime, 0, zMove * speed * Time.deltaTime);
 
     }
     

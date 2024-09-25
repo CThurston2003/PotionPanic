@@ -19,7 +19,10 @@ public class PlayerController : MonoBehaviour
     public float pitchSpeed = 1.0f; //Speed modifier for pitch
     public Transform playerBody; //Reference to the transform of the player body
     public Transform playerHead; //Reference to transform of player head
-    
+    public Rigidbody playerRigidbody;
+
+    private float headRigidBodyX;
+    private float bodyRigidBodyX;
    
     private void Awake(){
 
@@ -31,6 +34,9 @@ public class PlayerController : MonoBehaviour
 
         //Referencing the players rigidBody
         rigidBody = GetComponent<Rigidbody>();
+
+        headRigidBodyX = rigidBody.rotation.x;
+        bodyRigidBodyX = playerRigidbody.rotation.x;
 
     }
     
@@ -62,6 +68,14 @@ public class PlayerController : MonoBehaviour
         //Setting the position of the player head to follow the player body
         Vector3 offSet = new Vector3(0f,0.5f,0f);
         playerHead.position = playerBody.position + offSet;
+        //playerBody.rotation = playerHead.rotation.x;
+        bodyRigidBodyX = headRigidBodyX;
+        //Debug.Log(playerHead.rotation);
+
+
+
+        
+
 
     }
     
