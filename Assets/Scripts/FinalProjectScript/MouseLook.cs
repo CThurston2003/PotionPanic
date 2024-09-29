@@ -10,10 +10,12 @@ public class MouseLook : MonoBehaviour
 
     public Transform player; //reference to players body
 
-    float xRotation = 0f; //Rotation value to apply to players transform to rotate around the y axis
+    public float xRotation = 0f; //Rotation value to apply to players transform to rotate around the y axis
 
     public PlayerInput playerInput; //reference to player input object
     private InputAction lookAction; //Creating object to store look input actions in
+    public float mouseX;
+    public float mouseY;
 
     void Awake(){
 
@@ -32,8 +34,8 @@ public class MouseLook : MonoBehaviour
 
     public void mouseLook(InputAction.CallbackContext context){
 
-        float mouseX = lookAction.ReadValue<Vector2>().x * mouseSensitivity * Time.deltaTime;
-        float mouseY = lookAction.ReadValue<Vector2>().y * mouseSensitivity * Time.deltaTime;
+        mouseX = lookAction.ReadValue<Vector2>().x * mouseSensitivity * Time.deltaTime;
+        mouseY = lookAction.ReadValue<Vector2>().y * mouseSensitivity * Time.deltaTime;
         
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation,-90f,90f);
@@ -41,8 +43,7 @@ public class MouseLook : MonoBehaviour
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         player.Rotate(Vector3.up * mouseX);
 
-        //Debug.Log(mouseX);
-        Debug.Log(Vector3.up * mouseX * Time.deltaTime);
+        
         
 
     }
