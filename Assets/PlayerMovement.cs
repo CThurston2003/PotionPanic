@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public PlayerInput playerInput;
     public InputAction moveAction;
     public InputAction jumpAction;
-    float gravity = -9.81f;
+    float gravity = -29.43f;
     Vector3 velocity;
     public Transform groundCheck;
     public float groundDis = 0.4f;

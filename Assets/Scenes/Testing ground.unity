@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 724954161}
-  moveSpeed: 10
+  moveSpeed: 5
   playerInput: {fileID: 1706320071}
   moveAction:
     m_Name: Move
@@ -239,11 +239,21 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  jumpAction:
+    m_Name: Jump
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e2a31dde-58e3-4b0c-adbe-f86c454d86c9
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   groundCheck: {fileID: 611478316}
   groundDis: 0.4
   groundMask:
     serializedVersion: 2
     m_Bits: 2048
+  jumpHeight: 2
 --- !u!1 &823210340
 GameObject:
   m_ObjectHideFlags: 0
