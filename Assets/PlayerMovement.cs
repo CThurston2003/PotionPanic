@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public float groundDis = 0.4f;
     public LayerMask groundMask;
     bool isGrounded;
+    public float jumpHeight = 3f;
     
     
     //Awake function
@@ -43,7 +44,11 @@ public class PlayerMovement : MonoBehaviour
 
         isGrounded = Physics.CheckSphere(groundCheck.position,groundDis,groundMask);
 
-        
+        if(isGrounded && jumpAction.ReadValue<float>() > 0){
+
+            velocity.y = Mathf.Sqrt(jumpHeight*(-2)*gravity);
+
+        }
 
 
         float forward = moveAction.ReadValue<Vector2>().y;
