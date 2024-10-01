@@ -14,9 +14,12 @@ public class MouseLook : MonoBehaviour
 
     public PlayerInput playerInput; //reference to player input object
     private InputAction lookAction; //Creating object to store look input actions in
+    
+    //floats to store the mouseX and Y values from the mouse
     public float mouseX;
     public float mouseY;
 
+    //Awake function
     void Awake(){
 
         //Referencing the look actions and tying it to the script
@@ -29,37 +32,38 @@ public class MouseLook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        //Locking the cursor to the screen while playing the game
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    //Function to deal with first person view
     public void mouseLook(InputAction.CallbackContext context){
 
+        //Storing vector 2 values corresponding to the x and y that the player is looking
         mouseX = lookAction.ReadValue<Vector2>().x * mouseSensitivity * Time.deltaTime;
         mouseY = lookAction.ReadValue<Vector2>().y * mouseSensitivity * Time.deltaTime;
         
+        
+        //Storing the value of Y to correspond to rotation along the y axis, so rotating left and right
         xRotation -= mouseY;
+        //Clamping the values so the player cant look farther than 90 degrees up or down
         xRotation = Mathf.Clamp(xRotation,-90f,90f);
 
+        //Rotating the camera by rotating its transform component relative to its current position, and rotating the players body using a vector 3 value passed into the Rotate function
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         player.Rotate(Vector3.up * mouseX);
-
-        
-        
 
     }
 
     //Fixed update function
     void FixedUpdate(){
 
-       
-
-
     }
     
     
     // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         
     }
 }
