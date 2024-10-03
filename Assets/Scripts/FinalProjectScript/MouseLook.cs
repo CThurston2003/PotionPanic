@@ -59,6 +59,8 @@ public class MouseLook : MonoBehaviour
     //Fixed update function
     void FixedUpdate(){
 
+        Debug.DrawRay(transform.position, transform.forward * 10);
+
     }
     
     
