@@ -1,7 +1,7 @@
 //Name: Caleb Thurston
 //Description: Script to deal with the players movement using a character controller
-
-
+//Language: C#
+//Part of Project: Potion Panic
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,20 +11,22 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     
+    //------------------------Variables Section------------------------------
+    
     //Reference to the character controller
-    public CharacterController controller;
+    [SerializeField] private CharacterController controller;
 
     //Movespeed modifier
-    public float moveSpeed = 1;
+    [SerializeField] private float moveSpeed = 1;
 
     //Reference to the PlayerInput object
-    public PlayerInput playerInput;
+    [SerializeField] private PlayerInput playerInput;
 
     //Creating an input action object to store player's movement in
-    public InputAction moveAction;
+    [SerializeField] private InputAction moveAction;
 
     //Creating an input action object to store the player's jump action in
-    public InputAction jumpAction;
+    [SerializeField] private InputAction jumpAction;
 
     //Float for gravity (-9.81 is normal gravity)
     float gravity = -29.43f;
@@ -33,19 +35,19 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
 
     //Transform object used to check if the player is on the ground
-    public Transform groundCheck;
+    [SerializeField] private Transform groundCheck;
 
     //Variable to store the radius distance relating to checking how close the player has to get to be considered grounded
-    public float groundDis = 0.4f;
+    [SerializeField] private float groundDis = 0.4f;
 
     //Layer mask to store all ground objects so the ground check only triggers if it gets close to objects on this layer
-    public LayerMask groundMask;
+    [SerializeField] private LayerMask groundMask;
 
     //A bool to store whether or not the player is grounded
     bool isGrounded;
 
     //Variable to store the height the player can jump too
-    public float jumpHeight = 3f;
+    [SerializeField] private float jumpHeight = 3f;
     
     
     //Awake function
@@ -69,6 +71,13 @@ public class PlayerMovement : MonoBehaviour
     //Fixed Update Function
     void FixedUpdate(){
 
+        //Calling the movement function in the fixed update
+        Movement();
+
+    }
+
+    //Function to handle the implementation of player's movement
+    void Movement(){
 
         //Checking if the player is grounded by using Physics.CheckSphere, it greats a sphere around the specified position, and checks if anything on a specific layer mask crosses into 
         //this circle

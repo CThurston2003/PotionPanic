@@ -1,3 +1,8 @@
+//Name: Caleb Thurston
+//Description: Script to deal with the player looking around with the mouse
+//Language: C#
+//Part of Project: Potion Panic
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,18 +11,20 @@ using UnityEngine.InputSystem;
 public class MouseLook : MonoBehaviour
 {
 
-    public float mouseSensitivity = 1f; //Variable to control mouse sensitivity
+    //------------------------------Variables Section-------------------------------------------
 
-    public Transform player; //reference to players body
+    [SerializeField] private float mouseSensitivity = 1f; //Variable to control mouse sensitivity
 
-    public float xRotation = 0f; //Rotation value to apply to players transform to rotate around the y axis
+    [SerializeField] private Transform player; //reference to players body
 
-    public PlayerInput playerInput; //reference to player input object
+    private float xRotation = 0f; //Rotation value to apply to players transform to rotate around the y axis
+
+    [SerializeField] private PlayerInput playerInput; //reference to player input object
     private InputAction lookAction; //Creating object to store look input actions in
     
     //floats to store the mouseX and Y values from the mouse
-    public float mouseX;
-    public float mouseY;
+    private float mouseX;
+    private float mouseY;
 
     //Awake function
     void Awake(){
