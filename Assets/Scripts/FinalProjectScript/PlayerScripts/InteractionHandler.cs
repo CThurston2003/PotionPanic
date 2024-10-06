@@ -80,8 +80,7 @@ public class InteractionHandler : MonoBehaviour
     //Fixed Update method
     void FixedUpdate(){
 
-        //calling the interact check each update to check if the player is 
-        interactCheck();
+        
 
     }
 
@@ -89,7 +88,8 @@ public class InteractionHandler : MonoBehaviour
     void Update()
     {
 
-        
+        //calling the interact check each update to check if the player is 
+        interactCheck();
 
     }
 }
