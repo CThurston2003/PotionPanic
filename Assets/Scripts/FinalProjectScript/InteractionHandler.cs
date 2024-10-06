@@ -52,19 +52,21 @@ public class InteractionHandler : MonoBehaviour
     }
 
 
-
+    //Script to deal with sending a ray to check if a player is trying to interact with an interactable object
     void interactCheck(){
 
+        //Decided to use the old input system for the button for object interaction, because the new input system was causing issues
+        //with triggering 3 times (because each call is broken up into 3 parts, but it ends up triggering an interaction 3 times each time)
         if (Input.GetKeyDown("f")){
 
+            //Sending a ray out from where the players looking to in front of them
             ray = new Ray(playerCamera.position,playerCamera.forward);
 
+            //Checking if the raycast hits an object on the interactables layer, within "reach" distance
+            //And if it finds an interactable it will trigger the interact method on it, inherited from the IInteractable interface on it
             if (Physics.Raycast(ray, out RaycastHit hit, reach, interactables)){
-
                 if(hit.collider.gameObject.TryGetComponent(out IInteractable interactionObj)){
-
                     interactionObj.Interact();
-
                 }
 
             }
@@ -75,11 +77,19 @@ public class InteractionHandler : MonoBehaviour
 
     }
     
+    //Fixed Update method
+    void FixedUpdate(){
+
+        //calling the interact check each update to check if the player is 
+        interactCheck();
+
+    }
+
     // Update is called once per frame
     void Update()
     {
 
-        interactCheck();
+        
 
     }
 }

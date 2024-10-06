@@ -45,7 +45,7 @@ public class MouseLook : MonoBehaviour
     }
 
     //Function to deal with first person view
-    public void mouseLook(InputAction.CallbackContext context){
+    public void mouseLook(){
 
         //Storing vector 2 values corresponding to the x and y that the player is looking
         mouseX = lookAction.ReadValue<Vector2>().x * mouseSensitivity * Time.deltaTime;
@@ -66,7 +66,8 @@ public class MouseLook : MonoBehaviour
     //Fixed update function
     void FixedUpdate(){
 
-        Debug.DrawRay(transform.position, transform.forward * 10);
+        //Calling mouseLook function
+        mouseLook();
 
     }
     
