@@ -1,3 +1,9 @@
+//Name: Caleb Thurston
+//Description: Script to deal with the the door receiving a signal the player is interacting with it, and to open the door
+//Language: C#
+//Part of Project: Potion Panic
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

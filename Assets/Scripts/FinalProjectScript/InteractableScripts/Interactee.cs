@@ -1,3 +1,8 @@
+//Name: Caleb Thurston
+//Description: Script to deal with a specific instance of an interactable object
+//Language: C#
+//Part of Project: Potion Panic
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
