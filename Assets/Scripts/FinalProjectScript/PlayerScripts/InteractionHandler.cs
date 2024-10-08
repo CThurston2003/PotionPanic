@@ -44,8 +44,8 @@ public class InteractionHandler : MonoBehaviour
     //Ray variable to store the raycast in
     private Ray ray;
 
-    //Making a variable to act as a basic timer 
-    private int interactionHeld;
+    //Reference to holdPosition
+    [SerializeField] Transform holdPosition;
 
 
     
@@ -62,15 +62,13 @@ public class InteractionHandler : MonoBehaviour
     }
 
 
-    //Script to deal with sending a ray to check if a player is trying to interact with an interactable object
+    //Function to deal with sending a ray to check if a player is trying to interact with an interactable object
     public void interactCheck(){
 
 
         //Decided to use the old input system for the button for object interaction, because the new input system was causing issues
         //with triggering 3 times (because each call is broken up into 3 parts, but it ends up triggering an interaction 3 times each time)
-        if (Input.GetKeyDown("f")){
-
-            
+        if (Input.GetMouseButtonDown(0)){
 
             //Sending a ray out from where the players looking to in front of them
             ray = new Ray(playerCamera.position,playerCamera.forward);
@@ -79,6 +77,7 @@ public class InteractionHandler : MonoBehaviour
             //And if it finds an interactable it will trigger the interact method on it, inherited from the IInteractable interface on it
             if (Physics.Raycast(ray, out RaycastHit hit, reach, interactables)){
                 
+                //If case for interacting with an Interactable Only
                 if(hit.collider.gameObject.TryGetComponent(out IInteractable interactionObj) 
                 && GameObject.FindWithTag("InteractOnly"))
                 {
@@ -87,61 +86,38 @@ public class InteractionHandler : MonoBehaviour
 
                 }
                 
+                
+                
 
             }
-
-
            
 
         }
 
     }
-    
 
-    public void pickUpCheck(){
+    //Function to pickup and hold an item in front of the player
+    public void pickUp(){
 
-        //Sending a ray out from where the players looking to in front of them
-        ray = new Ray(playerCamera.position,playerCamera.forward);
-        
         if (Physics.Raycast(ray, out RaycastHit hit, reach, interactables)){
 
-                if(hit.collider.gameObject.TryGetComponent(out IPickUp pickUp)){
+            //If case for interacting with a pickup
+            if(hit.collider.gameObject.TryGetComponent(out IPickUp pickUp) &&
+            GameObject.FindWithTag("PickUp") && hit.collider.gameObject.TryGetComponent(out Transform pickUpObj)){
 
-                pickUp.PickUp();
+                pickUpObj.position = holdPosition.position;
 
-                } 
+            }
 
         }
-        
-
 
     }
 
 
     //Fixed Update method
     void FixedUpdate(){
-
-        // Debug.Log(interactionHeld);
-
-        // while(Input.GetKey("f")){
-
-        //     //Incrementing the interactionHeld by 1, because fixedUpdate runs at 60 frames per second
-        //     interactionHeld += 1; 
-            
-        //     if(interactionHeld >= 180){
-
-        //         pickUpCheck();
-
-        //     }
-
-           
-
-        // }
-        // //Resetting interactionHeld whenever something is interacted with
-        // interactionHeld = 0;
-
-        // Debug.Log(interactionHeld);
               
+        
 
     }
 
@@ -149,11 +125,21 @@ public class InteractionHandler : MonoBehaviour
     void Update()
     {
 
-        
+        if(Input.GetMouseButton(0)){
+
+        pickUp();
+
+        }
 
         //calling the interact check each update to check if the player is 
         interactCheck();
 
     }
+
+
+    void LateUpdate(){
+
+    }
+
 }
  
