@@ -41,6 +41,9 @@ public class InteractionHandler : MonoBehaviour
     //Creating a reach variable to define how far away a player can "reach" an interactable
     [SerializeField] private float reach = 10f;
 
+    //Reference to player character controller
+    [SerializeField] private CharacterController characterController;
+
     //Ray variable to store the raycast in
     private Ray ray;
 
@@ -105,9 +108,49 @@ public class InteractionHandler : MonoBehaviour
             if(hit.collider.gameObject.TryGetComponent(out IPickUp pickUp) &&
             GameObject.FindWithTag("PickUp") && hit.collider.gameObject.TryGetComponent(out Transform pickUpObj)){
 
-                pickUpObj.position = holdPosition.position;
+                
+                if(Input.GetMouseButtonDown(0)){
 
+                    pickUpObj.position = holdPosition.position;
+                    pickUpObj.parent = holdPosition;
+
+                }else if(Input.GetMouseButtonUp(0)){
+
+                    pickUpObj.SetParent(null);
+
+                }
+                
+                
+
+                
+            
             }
+
+
+
+
+        }
+
+    }
+
+    //Drop Function
+    public void Drop(){
+
+        if (Physics.Raycast(ray, out RaycastHit hit, reach, interactables)){
+
+            //If case for interacting with a pickup
+            if(hit.collider.gameObject.TryGetComponent(out IPickUp pickUp) &&
+            GameObject.FindWithTag("PickUp") && hit.collider.gameObject.TryGetComponent(out Transform pickUpObj)){
+
+                // pickUpObj.position = holdPosition.position;
+                // pickUpObj.parent = holdPosition;
+
+                pickUpObj.SetParent(null);
+            
+            }
+
+
+
 
         }
 
@@ -125,14 +168,24 @@ public class InteractionHandler : MonoBehaviour
     void Update()
     {
 
-        if(Input.GetMouseButton(0)){
-
-        pickUp();
-
-        }
-
         //calling the interact check each update to check if the player is 
         interactCheck();
+
+        pickUp();
+       
+        // if(Input.GetMouseButton(0)){
+
+        //     pickUp();
+
+        // }
+        
+        // if(Input.GetMouseButtonUp(0)){
+
+        //     Drop();
+
+        // }
+
+        
 
     }
 

@@ -393,8 +393,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.7267163
-  m_Center: {x: 0, y: 0.17114615, z: 0}
+  m_Radius: 0.4889183
+  m_Center: {x: 0, y: -0.06665182, z: 0}
 --- !u!4 &336992804
 Transform:
   m_ObjectHideFlags: 0
@@ -404,7 +404,7 @@ Transform:
   m_GameObject: {fileID: 336992802}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.799, y: 1.389, z: -7.066}
+  m_LocalPosition: {x: -4.799, y: 1.617, z: -7.066}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1346,6 +1346,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300002, guid: 900e53dd850c9cc4281be6fa21bdfea5, type: 3}
+--- !u!143 &929710094 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 2371561973652551382, guid: 9b4c2c10eb4055f42ae29689833c7ab7, type: 3}
+  m_PrefabInstance: {fileID: 5516805987309800619}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &978193822
 GameObject:
   m_ObjectHideFlags: 0
@@ -3644,6 +3649,10 @@ PrefabInstance:
       propertyPath: holdPosition
       value: 
       objectReference: {fileID: 1096103414}
+    - target: {fileID: 2747820340897712506, guid: 9b4c2c10eb4055f42ae29689833c7ab7, type: 3}
+      propertyPath: characterController
+      value: 
+      objectReference: {fileID: 929710094}
     - target: {fileID: 5530904017651105855, guid: 9b4c2c10eb4055f42ae29689833c7ab7, type: 3}
       propertyPath: m_Name
       value: Player
