@@ -1,8 +1,14 @@
+//Name: Caleb Thurston
+//Description: 
+//Script in which all potions use dealing with their interactions
+//Language: C#
+//Part of Project: Potion Panic
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PotionScript : MonoBehaviour, IInteractable, IPickUp
+public class PotionScript : MonoBehaviour, IInteractable
 {
     
     //------------------------Variables Section-------------------------
@@ -24,15 +30,6 @@ public class PotionScript : MonoBehaviour, IInteractable, IPickUp
 
 
     }
-
-    public void PickUp(){
-
-
-        Debug.Log("Trying to Pick Me Up!");
-        transform.position = holdPosition.position;
-
-    }
-    
 
     // Update is called once per frame
     void Update()

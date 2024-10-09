@@ -1,5 +1,7 @@
 //Name: Caleb Thurston
-//Description: Script to deal with handling a player looking at an interactable object, and the basics of how it should interact
+//Description: 
+//Script to deal with handling a player looking at an interactable object, and the basics of how it should interact
+//As well as dealing with picking up objects that are able to be
 //Language: C#
 //Part of Project: Potion Panic
 
@@ -17,23 +19,15 @@ public interface IInteractable{
 
 }
 
-    
-
-//Creating an interface for when an object can be picked up
-public interface IPickUp{
-
-    
-    //Abstract methods
-    public void PickUp();
-
-}
-
 public class InteractionHandler : MonoBehaviour
 {
     //-------------------------Variables Section---------------------------
     
     //Creating a layer mask for all the interactables to exist on
     [SerializeField] private LayerMask interactables;
+
+    //Creating a layer mask for all the pickups to exist on
+    [SerializeField] private LayerMask pickUps;
     
     //Creating a reference to the player's camera to use as the raycast starting point
     [SerializeField] private Transform playerCamera;
@@ -47,8 +41,14 @@ public class InteractionHandler : MonoBehaviour
     //Ray variable to store the raycast in
     private Ray ray;
 
-    //Reference to holdPosition
+    //Reference to holdPosition's transform
     [SerializeField] Transform holdPosition;
+
+    //Reference to hold position game object
+    [SerializeField] private GameObject holdPosObj;
+
+    //bool for keeping track if player is holding something
+    private bool isHolding = false;
 
 
     
@@ -71,7 +71,7 @@ public class InteractionHandler : MonoBehaviour
 
         //Decided to use the old input system for the button for object interaction, because the new input system was causing issues
         //with triggering 3 times (because each call is broken up into 3 parts, but it ends up triggering an interaction 3 times each time)
-        if (Input.GetMouseButtonDown(0)){
+        if (Input.GetKeyDown("f")){
 
             //Sending a ray out from where the players looking to in front of them
             ray = new Ray(playerCamera.position,playerCamera.forward);
@@ -81,78 +81,61 @@ public class InteractionHandler : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, reach, interactables)){
                 
                 //If case for interacting with an Interactable Only
-                if(hit.collider.gameObject.TryGetComponent(out IInteractable interactionObj) 
-                && GameObject.FindWithTag("InteractOnly"))
-                {
+                if(hit.collider.gameObject.TryGetComponent(out IInteractable interactionObj)){
 
                     interactionObj.Interact();
 
                 }
-                
-                
-                
-
             }
-           
-
         }
-
     }
 
     //Function to pickup and hold an item in front of the player
     public void pickUp(){
 
-        if (Physics.Raycast(ray, out RaycastHit hit, reach, interactables)){
+        //Sending a ray out from where the players looking to in front of them
+        ray = new Ray(playerCamera.position,playerCamera.forward);
+        
+        if (Physics.Raycast(ray, out RaycastHit hit, reach, pickUps)){
 
             //If case for interacting with a pickup
-            if(hit.collider.gameObject.TryGetComponent(out IPickUp pickUp) &&
-            GameObject.FindWithTag("PickUp") && hit.collider.gameObject.TryGetComponent(out Transform pickUpObj)){
+            if(hit.collider.gameObject.TryGetComponent(out IInteractable pickUp) &&
+            hit.collider.gameObject.TryGetComponent(out Transform pickUpObj)){
 
-                
-                if(Input.GetMouseButtonDown(0)){
+                //Checking if mouse is down and player is not currently holding something
+                //Picking up the item if thats the case
+                if(Input.GetMouseButtonDown(0) && isHolding == false){
 
                     pickUpObj.position = holdPosition.position;
-                    pickUpObj.parent = holdPosition;
+                    pickUpObj.SetParent(holdPosition);
+                    hit.collider.gameObject.TryGetComponent(out Rigidbody rb);
+                    rb.isKinematic = true;
 
-                }else if(Input.GetMouseButtonUp(0)){
-
-                    pickUpObj.SetParent(null);
+                    isHolding = true;
 
                 }
-                
-                
-
-                
-            
             }
-
-
-
-
         }
 
-    }
+        //Checking if the holdPosition has an object as a child (its 1 because theres a sphere for easy positioning in scene view)
+        if(holdPosition.childCount > 1){
 
-    //Drop Function
-    public void Drop(){
-
-        if (Physics.Raycast(ray, out RaycastHit hit, reach, interactables)){
-
-            //If case for interacting with a pickup
-            if(hit.collider.gameObject.TryGetComponent(out IPickUp pickUp) &&
-            GameObject.FindWithTag("PickUp") && hit.collider.gameObject.TryGetComponent(out Transform pickUpObj)){
-
-                // pickUpObj.position = holdPosition.position;
-                // pickUpObj.parent = holdPosition;
-
-                pickUpObj.SetParent(null);
+            //Assigning the gameObject thats currently being held to heldObj
+            GameObject heldObj = holdPosObj.transform.GetChild(1).gameObject;
             
+            //Checking if player is clicking right click and already holding an item
+            //And dropping the item if that is true
+            if(Input.GetMouseButtonDown(1) && isHolding == true){
+
+                heldObj.transform.SetParent(null);
+                heldObj.GetComponent<Rigidbody>().isKinematic = false;
+                isHolding = false;
+
             }
-
-
-
+            
 
         }
+        
 
     }
 
@@ -171,20 +154,8 @@ public class InteractionHandler : MonoBehaviour
         //calling the interact check each update to check if the player is 
         interactCheck();
 
+        //Calling the pickup function
         pickUp();
-       
-        // if(Input.GetMouseButton(0)){
-
-        //     pickUp();
-
-        // }
-        
-        // if(Input.GetMouseButtonUp(0)){
-
-        //     Drop();
-
-        // }
-
         
 
     }
