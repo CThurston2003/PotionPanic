@@ -66,7 +66,7 @@ public class MouseLook : MonoBehaviour
     //Fixed update function
     void FixedUpdate(){
 
-        mouseLook();
+        
 
     }
     
@@ -74,7 +74,7 @@ public class MouseLook : MonoBehaviour
     // Update is called once per frame
     void Update(){
         
-        
+        mouseLook();
 
     }
 }
