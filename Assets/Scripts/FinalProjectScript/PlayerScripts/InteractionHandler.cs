@@ -108,6 +108,7 @@ public class InteractionHandler : MonoBehaviour
 
                     pickUpObj.position = holdPosition.position;
                     pickUpObj.SetParent(holdPosition);
+                    pickUpObj.transform.localRotation = new Quaternion(0,180,0,0);
                     hit.collider.gameObject.TryGetComponent(out Rigidbody rb);
                     rb.isKinematic = true;
 
@@ -129,9 +130,28 @@ public class InteractionHandler : MonoBehaviour
 
                 heldObj.transform.SetParent(null);
                 heldObj.GetComponent<Rigidbody>().isKinematic = false;
+                heldObj.GetComponent<Rigidbody>().AddForce(heldObj.transform.forward * 2,ForceMode.Impulse);
                 isHolding = false;
 
             }
+
+
+            //Checking if player is clicking F and already holding an item
+            //to interact with it
+            
+            if (!(Physics.Raycast(ray, out RaycastHit hit2, reach, interactables))){
+
+                if(Input.GetKeyDown("f")){
+
+                //Calling the interact function
+                heldObj.TryGetComponent(out IInteractable intObj);
+                intObj.Interact();
+
+                }
+
+            }
+            
+            
             
 
         }
