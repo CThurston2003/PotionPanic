@@ -44,6 +44,7 @@ public class MouseLook : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+
     //Function to deal with first person view
     public void mouseLook(){
 

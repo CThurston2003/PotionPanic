@@ -16,6 +16,12 @@ public class PlayerMovement : MonoBehaviour
     //Reference to the character controller
     [SerializeField] private CharacterController controller;
 
+    //Reference to player's headbob anim
+    [SerializeField] private Animator headBob;
+
+    //Reference to the player camera's transform
+    [SerializeField] private Transform playerCamera;
+
     //Movespeed modifier
     [SerializeField] private float moveSpeed = 1;
 
@@ -48,6 +54,9 @@ public class PlayerMovement : MonoBehaviour
 
     //Variable to store the height the player can jump too
     [SerializeField] private float jumpHeight = 3f;
+
+    //Bool to store if player is headBobbing
+    // private bool isBob = false;
     
     
     //Awake function
@@ -67,6 +76,21 @@ public class PlayerMovement : MonoBehaviour
 
 
     }
+
+    //Creating an IEnumerator function to control headbobbing
+    // private IEnumerator headBob(bool isBob){
+
+    //     if(isBob == true){
+
+    //     //Debug.Log("Up!");
+    //     playerCamera.position = new Vector3(playerCamera.position.x, playerCamera.position.y + 0.1f, playerCamera.position.z);
+    //     yield return new WaitForSecondsRealtime(0.01f);
+    //     playerCamera.position = new Vector3(playerCamera.position.x, playerCamera.position.y - 0.1f, playerCamera.position.z);
+    //     //Debug.Log("Down");
+
+    //     }
+
+    // }
 
     //Fixed Update Function
     void FixedUpdate(){
@@ -109,11 +133,32 @@ public class PlayerMovement : MonoBehaviour
         //applying gravity to the player using the character controller move method        
         controller.Move(velocity*Time.deltaTime);
 
+        //If statement to read if the player is moving by reading their x and z value
+        if(move.x != 0 || move.z != 0){
+            
+            // isBob = true;
+            headBob.SetFloat("Bob2",1f);
+
+        }else if (move.x == 0 && move.z == 0){
+
+            Debug.Log("Im here!");
+            headBob.SetFloat("Bob2",0f);
+
+        }
+        // else{
+
+        //     isBob = false;
+
+        // }
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+        // Debug.Log(isBob);
+        // StartCoroutine(headBob(isBob));
+
     }
 }
