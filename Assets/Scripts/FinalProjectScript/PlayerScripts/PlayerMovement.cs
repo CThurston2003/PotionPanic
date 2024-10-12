@@ -141,7 +141,6 @@ public class PlayerMovement : MonoBehaviour
 
         }else if (move.x == 0 && move.z == 0){
 
-            Debug.Log("Im here!");
             headBob.SetFloat("Bob2",0f);
 
         }
