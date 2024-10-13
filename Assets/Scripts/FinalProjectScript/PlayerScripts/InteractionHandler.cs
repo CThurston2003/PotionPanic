@@ -90,6 +90,33 @@ public class InteractionHandler : MonoBehaviour
         }
     }
 
+    // //Function to handle interacting with minigames
+    // public void miniGameInteract(){
+
+    //     //If player is left clicking on the miniGame canvas
+    //     if(Input.GetMouseButtonDown(0)){
+
+    //         //Sending a ray out from where the players looking, to whats in front of them
+    //         ray = new Ray(playerCamera.position,playerCamera.forward);
+
+    //         //Checking if the GraphicsRaycaster hits a part of the canvas
+    //         if(Physics.Raycast(ray, out RaycastHit hit, reach, interactables, QueryTriggerInteraction.Collide)){
+
+    //             if(hit.collider.isTrigger){
+
+    //                 Debug.Log("Looking at trigger");
+
+
+    //             }
+
+    //         }
+
+    //     }
+
+
+    // }
+
+
     //Function to pickup and hold an item in front of the player
     public void pickUp(){
 

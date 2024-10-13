@@ -18,14 +18,43 @@ public class CookingPot : MonoBehaviour, IInteractable
 
     //Variable to store whether the minigame is active or not
     private bool gameActive = false;
+
+    //Variable to decide how much time the player has to do a minigame in seconds
+    private int timeLimit = 5;
+
+    //Variable to store miniGame position
+    Vector3 gamePosition;
+
+    //Variable to store miniGame rotation
+    Quaternion gameRotation;
+
+    
+    //Creating a coroutine that will close the minigame if the player runs out of time
+    IEnumerator gameTime(){
+
+        yield return new WaitForSeconds(timeLimit);
+        // gameActive = !gameActive;
+        // miniGame.SetActive(gameActive);
+        Debug.Log("New Iteration");
+        Destroy(miniGame);
+        miniGame = Instantiate(miniGame, gamePosition, gameRotation);
+
+        
+
+    }
     
     //Implementing Abstract method from the interactable interface
     public void Interact(){
 
         //Code to toggle on or off the minigame when the player interacts with it
         gameActive = !gameActive;
-        Debug.Log("The player is tryna interact with the pot!");
         miniGame.SetActive(gameActive);
+        if(gameActive == true){
+
+            StartCoroutine(gameTime());
+
+        }
+        
 
     }
     
@@ -33,6 +62,9 @@ public class CookingPot : MonoBehaviour, IInteractable
     // Start is called before the first frame update
     void Start()
     {
+
+        gamePosition = miniGame.transform.position;
+        gameRotation = miniGame.transform.rotation;
 
        //Setting the game to be off at the start
        miniGame.SetActive(gameActive);
