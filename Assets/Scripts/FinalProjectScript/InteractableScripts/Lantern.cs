@@ -30,12 +30,8 @@ public class Lantern : MonoBehaviour, IInteractable
 
     //Implementing abstract method Interact from the Interactable interface
     public void Interact(){
-
-        Debug.Log("Light switched!");
         lightOn = !lightOn;
         lightGlow.SetActive(lightOn);
-
-
     }
 
     // Update is called once per frame
