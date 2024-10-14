@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
 {
@@ -37,6 +38,12 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
     //variable to store current trigger
     private GameObject currentTrigger;
 
+    //Variable to store the players score in
+    private int playerScore = 0;
+
+    //Reference to the text part of the Canvas that displays the player's boil score
+    [SerializeField] private TMP_Text scoreText;
+
     //Hardcoded list of triggers on the boil flask
     [SerializeField] private GameObject trigger1;
     [SerializeField] private GameObject trigger2;
@@ -66,34 +73,55 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
             randTrigger = Random.Range(1,6);
             triggerOn = true;
 
-        }
-
-        //Switch case based on the output of randTrigger
-        switch(randTrigger){
+            //Switch case based on the output of randTrigger
+            switch(randTrigger){
 
             case 1:
+            
             currentTrigger = trigger1;
             currentTrigger.SetActive(true);
+            StartCoroutine(triggerLife());
 
             break;
 
             case 2:
 
+            currentTrigger = trigger2;
+            currentTrigger.SetActive(true);
+            StartCoroutine(triggerLife());
+
             break;
 
             case 3:
+
+            currentTrigger = trigger3;
+            currentTrigger.SetActive(true);
+            StartCoroutine(triggerLife());
 
             break;
 
             case 4:
 
+            currentTrigger = trigger4;
+            currentTrigger.SetActive(true);
+            StartCoroutine(triggerLife());
+
             break;
 
             case 5:
 
+            currentTrigger = trigger5;
+            currentTrigger.SetActive(true);
+            StartCoroutine(triggerLife());
+
             break;
 
         }
+
+
+        }
+
+        
 
         //instantiating a ray to shoot from the fire
         ray = new Ray(fire.transform.position,fire.transform.up);
@@ -108,36 +136,19 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
         this.transform.localRotation = Quaternion.Euler(this.transform.localRotation.x,this.transform.localRotation.y,flaskRotation);
     
         if(Physics.Raycast(ray, out RaycastHit hit, 10, triggerLayer)){
-
-            Debug.Log("Hitting a trigger");
+            playerScore += 1;
+            Debug.Log(playerScore);
+            string score = playerScore.ToString();
+            scoreText.text = score;
 
         }
-
-
-
-
-
     }
     
 
     //creating a Coroutine for the lifespan of the trigger
     IEnumerator triggerLife(){
-
         yield return new WaitForSeconds(triggerTimer);
-
-
-    }
-    
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        currentTrigger.SetActive(false);
+        triggerOn = false;
     }
 }

@@ -23,7 +23,7 @@ public class CookingPot : MonoBehaviour, IInteractable
     private bool gameActive = false;
 
     //Variable to decide how much time the player has to do a minigame in seconds
-    private int timeLimit = 5;
+    private int timeLimit = 30;
 
     //Variable to store miniGame position
     Vector3 gamePosition;
