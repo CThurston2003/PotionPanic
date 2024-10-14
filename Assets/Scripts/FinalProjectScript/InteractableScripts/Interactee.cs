@@ -13,9 +13,9 @@ public class Interactee : MonoBehaviour, IInteractable
     //--------------------------Variables Section--------------------------
     
     //Storing red green and blue value
-    [SerializeField] private float red;
-    [SerializeField] private float green;
-    [SerializeField] private float blue;
+    [SerializeField] private float red = 0;
+    [SerializeField] private float green = 0;
+    [SerializeField] private float blue = 0;
 
 
     //start method

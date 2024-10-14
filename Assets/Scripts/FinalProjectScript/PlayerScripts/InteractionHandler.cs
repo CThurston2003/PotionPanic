@@ -19,6 +19,14 @@ public interface IInteractable{
 
 }
 
+//Interface for minigame objects to inherit from
+public interface IMiniObject{
+
+    //abstract methods
+    public void MiniInteract();
+
+}
+
 public class InteractionHandler : MonoBehaviour
 {
     //-------------------------Variables Section---------------------------
@@ -91,30 +99,26 @@ public class InteractionHandler : MonoBehaviour
     }
 
     // //Function to handle interacting with minigames
-    // public void miniGameInteract(){
+    public void MiniGameInteraction(){
 
-    //     //If player is left clicking on the miniGame canvas
-    //     if(Input.GetMouseButtonDown(0)){
+        //Sending a ray out from where the players looking to in front of them
+        ray = new Ray(playerCamera.position,playerCamera.forward);
 
-    //         //Sending a ray out from where the players looking, to whats in front of them
-    //         ray = new Ray(playerCamera.position,playerCamera.forward);
+        //Checking if player is looking at an interactable object
+        if (Physics.Raycast(ray, out RaycastHit hit, reach, interactables)){
 
-    //         //Checking if the GraphicsRaycaster hits a part of the canvas
-    //         if(Physics.Raycast(ray, out RaycastHit hit, reach, interactables, QueryTriggerInteraction.Collide)){
+            //Checking if raycast hits a minigame object
+            if(hit.collider.gameObject.TryGetComponent(out IMiniObject miniObject)){
 
-    //             if(hit.collider.isTrigger){
+                miniObject.MiniInteract();
 
-    //                 Debug.Log("Looking at trigger");
+            }
 
-
-    //             }
-
-    //         }
-
-    //     }
+        }
 
 
-    // }
+
+    }
 
 
     //Function to pickup and hold an item in front of the player
@@ -203,6 +207,9 @@ public class InteractionHandler : MonoBehaviour
 
         //Calling the pickup function
         pickUp();
+
+        //Calling function to check if there is a minigame object
+        MiniGameInteraction();
         
 
     }

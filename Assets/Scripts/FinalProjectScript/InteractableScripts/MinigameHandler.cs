@@ -18,7 +18,8 @@ public class MinigameHandler : MonoBehaviour, IInteractable
     //Implementing abstract method from interable interface
     public void Interact(){
 
-        Debug.Log("Francis will be missed :(");
+        // Debug.Log("Francis will be missed :(");
+        // this.GetComponent<Renderer>().material.color = new Color(1f,1f,1f);
 
     }
     

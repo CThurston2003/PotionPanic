@@ -16,6 +16,9 @@ public class CookingPot : MonoBehaviour, IInteractable
     //Reference to the gameobject that is the minigame
     [SerializeField] private GameObject miniGame;
 
+    //Reference to a dummy game object to instantiate from
+    [SerializeField] private GameObject dummyGame;
+
     //Variable to store whether the minigame is active or not
     private bool gameActive = false;
 
@@ -33,11 +36,10 @@ public class CookingPot : MonoBehaviour, IInteractable
     IEnumerator gameTime(){
 
         yield return new WaitForSeconds(timeLimit);
-        // gameActive = !gameActive;
-        // miniGame.SetActive(gameActive);
-        Debug.Log("New Iteration");
+        gameActive = !gameActive;
         Destroy(miniGame);
-        miniGame = Instantiate(miniGame, gamePosition, gameRotation);
+        miniGame = Instantiate(dummyGame, gamePosition, gameRotation);
+        miniGame.SetActive(gameActive);
 
         
 
