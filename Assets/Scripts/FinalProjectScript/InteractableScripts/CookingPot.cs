@@ -36,26 +36,29 @@ public class CookingPot : MonoBehaviour, IInteractable
     IEnumerator gameTime(){
 
         yield return new WaitForSeconds(timeLimit);
-        gameActive = !gameActive;
+        gameActive = false;
         Destroy(miniGame);
         miniGame = Instantiate(dummyGame, gamePosition, gameRotation);
         miniGame.SetActive(gameActive);
 
-        
-
     }
     
-    //Implementing Abstract method from the interactable interface
+
     public void Interact(){
 
-        //Code to toggle on or off the minigame when the player interacts with it
-        gameActive = !gameActive;
-        miniGame.SetActive(gameActive);
-        if(gameActive == true){
+        if(Input.GetKeyDown("f")){
 
-            StartCoroutine(gameTime());
+            //Code to toggle on or off the minigame when the player interacts with it
+            gameActive = !gameActive;
+            if(gameActive == true){
+
+                StartCoroutine(gameTime());
+
+            }
+            miniGame.SetActive(gameActive);
 
         }
+        
         
 
     }

@@ -60,12 +60,77 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
     public void Interact(){
 
 
-
     }
 
-    //From IMiniObject, this is where the actual minigame interaction works
-    public void MiniInteract(){
+    // //From IMiniObject, this is where the actual minigame interaction works
+    // public void MiniInteract(){
         
+    //     //deciding a new trigger to turn on based on if theres not any triggers on currently
+    //     if(triggerOn == false){
+
+    //         //Randomly deciding between the 5 triggers
+    //         randTrigger = Random.Range(1,6);
+    //         triggerOn = true;
+
+    //         //Switch case based on the output of randTrigger
+    //         switch(randTrigger){
+
+    //         case 1:
+    //         currentTrigger = trigger1;
+    //         currentTrigger.SetActive(true);
+    //         StartCoroutine(triggerLife());
+    //         break;
+
+    //         case 2:
+    //         currentTrigger = trigger2;
+    //         currentTrigger.SetActive(true);
+    //         StartCoroutine(triggerLife());
+    //         break;
+
+    //         case 3:
+    //         currentTrigger = trigger3;
+    //         currentTrigger.SetActive(true);
+    //         StartCoroutine(triggerLife());
+    //         break;
+
+    //         case 4:
+    //         currentTrigger = trigger4;
+    //         currentTrigger.SetActive(true);
+    //         StartCoroutine(triggerLife());
+    //         break;
+
+    //         case 5:
+    //         currentTrigger = trigger5;
+    //         currentTrigger.SetActive(true);
+    //         StartCoroutine(triggerLife());
+    //         break;
+    //         }
+    //     }
+
+    //     //instantiating a ray to shoot from the fire
+    //     ray = new Ray(fire.transform.position,fire.transform.up);
+        
+    //     //Checking if the player is holding the left or right arrow and if they are, 
+    //     //it rotates the flask that direction
+    //     if(Input.GetKey("left")){
+    //         flaskRotation += 1;
+    //     }else if(Input.GetKey("right")){
+    //         flaskRotation -= 1;
+    //     }
+    //     this.transform.localRotation = Quaternion.Euler(this.transform.localRotation.x,this.transform.localRotation.y,flaskRotation);
+    
+    //     if(Physics.Raycast(ray, out RaycastHit hit, 10, triggerLayer)){
+    //         playerScore += 1;
+    //         Debug.Log(playerScore);
+    //         string score = playerScore.ToString();
+    //         scoreText.text = score;
+
+    //     }
+    // }
+
+    //MiniStart abstract method
+    public void MiniStart(){
+
         //deciding a new trigger to turn on based on if theres not any triggers on currently
         if(triggerOn == false){
 
@@ -77,51 +142,36 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
             switch(randTrigger){
 
             case 1:
-            
             currentTrigger = trigger1;
             currentTrigger.SetActive(true);
             StartCoroutine(triggerLife());
-
             break;
 
             case 2:
-
             currentTrigger = trigger2;
             currentTrigger.SetActive(true);
             StartCoroutine(triggerLife());
-
             break;
 
             case 3:
-
             currentTrigger = trigger3;
             currentTrigger.SetActive(true);
             StartCoroutine(triggerLife());
-
             break;
 
             case 4:
-
             currentTrigger = trigger4;
             currentTrigger.SetActive(true);
             StartCoroutine(triggerLife());
-
             break;
 
             case 5:
-
             currentTrigger = trigger5;
             currentTrigger.SetActive(true);
             StartCoroutine(triggerLife());
-
             break;
-
+            }
         }
-
-
-        }
-
-        
 
         //instantiating a ray to shoot from the fire
         ray = new Ray(fire.transform.position,fire.transform.up);
@@ -142,8 +192,15 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
             scoreText.text = score;
 
         }
+
     }
     
+    //MiniRun abstract method
+    public void MiniRun(){
+
+
+
+    }
 
     //creating a Coroutine for the lifespan of the trigger
     IEnumerator triggerLife(){
