@@ -20,9 +20,6 @@ public interface IInteractable{
 public interface IMiniObject{
 
     //abstract methods
-    // public void MiniInteract();
-
-    public void MiniStart();
 
     public void MiniRun();
 

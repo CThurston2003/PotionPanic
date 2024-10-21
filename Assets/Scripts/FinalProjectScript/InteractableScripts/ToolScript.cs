@@ -8,7 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CookingPot : MonoBehaviour, IInteractable
+public class ToolScript : MonoBehaviour, IInteractable
 {
     
     //------------------Variables Section------------------------
@@ -31,7 +31,7 @@ public class CookingPot : MonoBehaviour, IInteractable
     //Variable to store miniGame rotation
     Quaternion gameRotation;
 
-    //Ray variable
+    //Ray variable for checking if the minigame is active above the tool
     private Ray ray;
 
     //Variable for the layerMask for the ray
@@ -46,12 +46,11 @@ public class CookingPot : MonoBehaviour, IInteractable
         Destroy(miniGame);
         miniGame = Instantiate(dummyGame, gamePosition, gameRotation);
         miniGame.SetActive(gameActive);
-
     }
     
 
-    public void Interact(){
 
+    public void Interact(){
 
         //Code to toggle on or off the minigame when the player interacts with it
         gameActive = !gameActive;
@@ -61,7 +60,6 @@ public class CookingPot : MonoBehaviour, IInteractable
 
         }
         miniGame.SetActive(gameActive);
-
     }
     
     
@@ -69,34 +67,38 @@ public class CookingPot : MonoBehaviour, IInteractable
     void Start()
     {
 
+        //Setting the game position to be referenced later when creating a new instance of the minigame
         gamePosition = miniGame.transform.position;
         gameRotation = miniGame.transform.rotation;
 
        //Setting the game to be off at the start
        miniGame.SetActive(gameActive);
-
     }
 
     // Update is called once per frame
     void Update()
     {
         
+        //--------Making A Raycast array of all the things above the tool and checking if one of them is a minigame--------
+    
+        //Only checking if the minigame is supposed to be active
         if(gameActive == true){
 
+            //Making a raycast array and storing a RaycastAll in it
             RaycastHit[] hits;
             hits = Physics.RaycastAll(this.transform.position,this.transform.up, 10, interactables);
 
-                for(int i = 0; i < hits.Length; i++){
+            //Iterating through the raycast array to check 
+            for(int i = 0; i < hits.Length; i++){
 
-                    if(hits[i].collider.gameObject.TryGetComponent(out IMiniObject miniObj)){
-                    
-                        miniObj.MiniRun();
-
-                    }
+                //Checking if the specific index in the Raycast array has the IMiniObject interface
+                if(hits[i].collider.gameObject.TryGetComponent(out IMiniObject miniObj)){
+                
+                    //Running the MiniRun command from the object if it does
+                    miniObj.MiniRun();
 
                 }
-
+            }
         }
-
     }
 }

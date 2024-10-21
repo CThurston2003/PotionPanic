@@ -11,22 +11,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-// //Creating an interactable interface that all interactable objects will inherit from
-// public interface IInteractable{
-
-//     //Abstract methods
-//     public void Interact();
-
-// }
-
-// //Interface for minigame objects to inherit from
-// public interface IMiniObject{
-
-//     //abstract methods
-//     public void MiniInteract();
-
-// }
-
 public class InteractionHandler : MonoBehaviour
 {
     //-------------------------Variables Section---------------------------
@@ -57,10 +41,6 @@ public class InteractionHandler : MonoBehaviour
 
     //bool for keeping track if player is holding something
     private bool isHolding = false;
-
-    //bool for keeping track if player is interacting with a minigame
-    // private bool isGaming = false;
-
 
     
     //Awake function
@@ -93,64 +73,11 @@ public class InteractionHandler : MonoBehaviour
                 
                 //If case for interacting with an Interactable Only
                 if(hit.collider.gameObject.TryGetComponent(out IInteractable interactionObj)){
-
                     interactionObj.Interact();
-
-                    // if(interactionObj.Tag == "miniGame"){
-
-                    //     isGaming = true;
-
-                    // }
-
                 }
-
-                // //Checking if raycast hits a minigame object
-                // if(hit.collider.gameObject.TryGetComponent(out IMiniObject miniObject)){
-
-                //     miniObject.MiniStart();
-                    
-                //     // if(Input.GetKeyDown("f")){
-
-                //     //     if(holdPosition.transform.GetChild(1)){
-
-                //     //         Destroy(holdPosition.transform.GetChild(1).gameObject);
-                //     //         isHolding = false;
-
-                //     //     }
-                //     // }
-                // }
-
             }
         }
     }
-
-    // // //Function to handle interacting with minigames
-    // public void MiniGameInteraction(){
-
-    //     //Sending a ray out from where the players looking to in front of them
-    //     ray = new Ray(playerCamera.position,playerCamera.forward);
-
-    //     //Checking if player is looking at an interactable object
-    //     if (Physics.Raycast(ray, out RaycastHit hit, reach, interactables)){
-
-    //         // //Checking if raycast hits a minigame object
-    //         // if(hit.collider.gameObject.TryGetComponent(out IMiniObject miniObject)){
-
-    //         //     miniObject.MiniInteract();
-                
-    //         //     // if(Input.GetKeyDown("f")){
-
-    //         //     //     if(holdPosition.transform.GetChild(1)){
-
-    //         //     //         Destroy(holdPosition.transform.GetChild(1).gameObject);
-    //         //     //         isHolding = false;
-
-    //         //     //     }
-    //         //     // }
-    //         // }
-    //     }
-    // }
-
 
     //Function to pickup and hold an item in front of the player
     public void pickUp(){
@@ -239,14 +166,11 @@ public class InteractionHandler : MonoBehaviour
         //Calling the pickup function
         pickUp();
 
-        // //Calling function to check if there is a minigame object
-        // MiniGameInteraction();
-        
-
     }
 
 
-    void LateUpdate(){
+    void LateUpdate()
+    {
 
     }
 
