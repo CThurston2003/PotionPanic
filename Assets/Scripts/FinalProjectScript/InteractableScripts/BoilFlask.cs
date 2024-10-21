@@ -128,8 +128,8 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
     //     }
     // }
 
-    //MiniStart abstract method
-    public void MiniStart(){
+    //MiniRun abstract method
+    public void MiniRun(){
 
         //deciding a new trigger to turn on based on if theres not any triggers on currently
         if(triggerOn == false){
@@ -195,8 +195,8 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
 
     }
     
-    //MiniRun abstract method
-    public void MiniRun(){
+    //MiniStart abstract method
+    public void MiniStart(){
 
 
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - InteractOnly
   - PickUp
+  - miniGame
   layers:
   - Default
   - TransparentFX

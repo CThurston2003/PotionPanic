@@ -58,6 +58,9 @@ public class InteractionHandler : MonoBehaviour
     //bool for keeping track if player is holding something
     private bool isHolding = false;
 
+    //bool for keeping track if player is interacting with a minigame
+    // private bool isGaming = false;
+
 
     
     //Awake function
@@ -93,23 +96,29 @@ public class InteractionHandler : MonoBehaviour
 
                     interactionObj.Interact();
 
-                }
+                    // if(interactionObj.Tag == "miniGame"){
 
-                //Checking if raycast hits a minigame object
-                if(hit.collider.gameObject.TryGetComponent(out IMiniObject miniObject)){
+                    //     isGaming = true;
 
-                    miniObject.MiniStart();
-                    
-                    // if(Input.GetKeyDown("f")){
-
-                    //     if(holdPosition.transform.GetChild(1)){
-
-                    //         Destroy(holdPosition.transform.GetChild(1).gameObject);
-                    //         isHolding = false;
-
-                    //     }
                     // }
+
                 }
+
+                // //Checking if raycast hits a minigame object
+                // if(hit.collider.gameObject.TryGetComponent(out IMiniObject miniObject)){
+
+                //     miniObject.MiniStart();
+                    
+                //     // if(Input.GetKeyDown("f")){
+
+                //     //     if(holdPosition.transform.GetChild(1)){
+
+                //     //         Destroy(holdPosition.transform.GetChild(1).gameObject);
+                //     //         isHolding = false;
+
+                //     //     }
+                //     // }
+                // }
 
             }
         }

@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 2508803079818082220, guid: 616fdaa7dbff40e4f91c695be15f9f4f, type: 3}
+      propertyPath: m_TagString
+      value: miniGame
+      objectReference: {fileID: 0}
     - target: {fileID: 5125010707129076267, guid: 616fdaa7dbff40e4f91c695be15f9f4f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5
@@ -941,7 +945,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   miniGame: {fileID: 5357786308654085292}
   dummyGame: {fileID: 4332155653108301281, guid: 789e8d08ba1bd34408130c619caf56aa, type: 3}
-  player: {fileID: 1939712289}
+  interactables:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!1 &1114526819
 GameObject:
   m_ObjectHideFlags: 0
@@ -1794,11 +1800,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &1939712289 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8504860212375435078, guid: d4bf80d75004d73428f2c6b196e92bce, type: 3}
-  m_PrefabInstance: {fileID: 2464096652850532883}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2464096652850532883
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1919,6 +1920,10 @@ PrefabInstance:
     - target: {fileID: 4332155653108301281, guid: 789e8d08ba1bd34408130c619caf56aa, type: 3}
       propertyPath: m_Name
       value: BoilingMiniGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4332155653108301281, guid: 789e8d08ba1bd34408130c619caf56aa, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5354656907066699431, guid: 789e8d08ba1bd34408130c619caf56aa, type: 3}
       propertyPath: m_Camera

@@ -31,6 +31,12 @@ public class CookingPot : MonoBehaviour, IInteractable
     //Variable to store miniGame rotation
     Quaternion gameRotation;
 
+    //Ray variable
+    private Ray ray;
+
+    //Variable for the layerMask for the ray
+    [SerializeField] private LayerMask interactables;
+
     
     //Creating a coroutine that will close the minigame if the player runs out of time
     IEnumerator gameTime(){
@@ -46,20 +52,15 @@ public class CookingPot : MonoBehaviour, IInteractable
 
     public void Interact(){
 
-        if(Input.GetKeyDown("f")){
 
-            //Code to toggle on or off the minigame when the player interacts with it
-            gameActive = !gameActive;
-            if(gameActive == true){
+        //Code to toggle on or off the minigame when the player interacts with it
+        gameActive = !gameActive;
+        if(gameActive == true){
 
-                StartCoroutine(gameTime());
-
-            }
-            miniGame.SetActive(gameActive);
+            StartCoroutine(gameTime());
 
         }
-        
-        
+        miniGame.SetActive(gameActive);
 
     }
     
@@ -80,5 +81,22 @@ public class CookingPot : MonoBehaviour, IInteractable
     void Update()
     {
         
+        if(gameActive == true){
+
+            RaycastHit[] hits;
+            hits = Physics.RaycastAll(this.transform.position,this.transform.up, 10, interactables);
+
+                for(int i = 0; i < hits.Length; i++){
+
+                    if(hits[i].collider.gameObject.TryGetComponent(out IMiniObject miniObj)){
+                    
+                        miniObj.MiniRun();
+
+                    }
+
+                }
+
+        }
+
     }
 }
