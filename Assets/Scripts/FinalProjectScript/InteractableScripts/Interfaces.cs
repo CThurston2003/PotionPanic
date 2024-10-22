@@ -16,11 +16,17 @@ public interface IInteractable{
 
 }
 
+public interface IInteractableTool{
+
+    //Abstract methods
+    public void InteractTool(bool ingredient);
+
+}
+
 //Interface for minigame objects to inherit from
 public interface IMiniObject{
 
     //abstract methods
-
     public void MiniRun();
 
 }

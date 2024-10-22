@@ -44,8 +44,8 @@ public class InteractionHandler : MonoBehaviour
 
     
     //Awake function
-    void Awake(){
-
+    void Awake()
+    {
 
     }
     
@@ -73,7 +73,14 @@ public class InteractionHandler : MonoBehaviour
                 
                 //If case for interacting with an Interactable Only
                 if(hit.collider.gameObject.TryGetComponent(out IInteractable interactionObj)){
-                    interactionObj.Interact();
+                    
+                    //Checking if the interactable is specifically a tool for alchemy, and if not, just interacting with it
+                    //Also making sure that if the player has an ingredient and interacts with it, it treats it accordingly
+                    if(hit.collider.gameObject.TryGetComponent(out IInteractableTool interactionTool) && holdPosition.childCount > 1){
+                        interactionTool.InteractTool(true);
+                    }else{
+                        interactionObj.Interact();
+                    }
                 }
             }
         }
@@ -124,7 +131,6 @@ public class InteractionHandler : MonoBehaviour
 
             }
 
-
             //Checking if player is clicking F and already holding an item
             //to interact with it
             
@@ -137,23 +143,15 @@ public class InteractionHandler : MonoBehaviour
                 intObj.Interact();
 
                 }
-
             }
-            
-            
-            
-
         }
-        
-
     }
 
 
     //Fixed Update method
-    void FixedUpdate(){
-              
-        
-
+    void FixedUpdate()
+    {
+    
     }
 
     // Update is called once per frame
@@ -173,6 +171,5 @@ public class InteractionHandler : MonoBehaviour
     {
 
     }
-
 }
  
