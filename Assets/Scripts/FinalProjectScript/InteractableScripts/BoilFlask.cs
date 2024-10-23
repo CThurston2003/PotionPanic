@@ -113,9 +113,9 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
         //Checking if the player is holding the left or right arrow and if they are, 
         //it rotates the flask that direction
         if(Input.GetKey("left")){
-            flaskRotation += 3;
+            flaskRotation += 2;
         }else if(Input.GetKey("right")){
-            flaskRotation -= 3;
+            flaskRotation -= 2;
         }
         this.transform.localRotation = Quaternion.Euler(this.transform.localRotation.x,this.transform.localRotation.y,flaskRotation);
     

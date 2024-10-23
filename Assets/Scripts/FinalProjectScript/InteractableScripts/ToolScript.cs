@@ -100,10 +100,9 @@ public class ToolScript : MonoBehaviour, IInteractable, IInteractableTool
        miniGame.SetActive(gameActive);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    //Fixed Update
+    void FixedUpdate(){
+
         //--------Making A Raycast array of all the things above the tool and checking if one of them is a minigame--------
     
         //Only checking if the minigame is supposed to be active
@@ -126,5 +125,13 @@ public class ToolScript : MonoBehaviour, IInteractable, IInteractableTool
                 }
             }
         }
+
+    }
+    
+    // Update is called once per frame
+    void Update()
+    {
+        
+        
     }
 }
