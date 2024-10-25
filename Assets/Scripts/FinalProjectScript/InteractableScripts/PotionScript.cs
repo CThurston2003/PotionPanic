@@ -91,6 +91,7 @@ public class PotionScript : MonoBehaviour, IInteractable
     
     
     //Implementing abstract method from IInteractable interface
+    //Possibly have this function in the interact of the actual potion instance, not this script?
     public void Interact(){
 
         //Switch case to deal with the different type of potions

@@ -12,10 +12,15 @@ public class Interactee : MonoBehaviour, IInteractable
 
     //--------------------------Variables Section--------------------------
     
-    //Storing red green and blue value
-    [SerializeField] private float red = 0;
-    [SerializeField] private float green = 0;
-    [SerializeField] private float blue = 0;
+    // //Storing red green and blue value
+    // [SerializeField] private float _red = 0;
+    // [SerializeField] private float _green = 0;
+    // [SerializeField] private float _blue = 0;
+
+    //Creating Properties for red, green, and blue
+    public float Red{get; set;}
+    public float Green{get; set;}
+    public float Blue{get; set;}
 
 
     //start method
@@ -28,11 +33,11 @@ public class Interactee : MonoBehaviour, IInteractable
     public void Interact(){
 
         Debug.Log("Color Change!");
-        red = Random.Range(0f,1f);
-        green = Random.Range(0f,0f);
-        blue = Random.Range(0f,1f);
+        Red = Random.Range(0f,1f);
+        Green = Random.Range(0f,0f);
+        Blue = Random.Range(0f,1f);
 
-        this.GetComponent<Renderer>().material.color = new Color(red,green,blue);
+        this.GetComponent<Renderer>().material.color = new Color(Red,Green,Blue);
 
 
     }

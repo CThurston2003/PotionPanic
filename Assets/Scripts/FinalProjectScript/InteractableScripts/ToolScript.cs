@@ -23,13 +23,26 @@ public class ToolScript : MonoBehaviour, IInteractable, IInteractableTool
     private bool gameActive = false;
 
     //Variable to decide how much time the player has to do a minigame in seconds
-    private int timeLimit = 10;
+    private int _timeLimit = 10;
+    //Creating a property for "_timeLimit"
+    public int TimeLimit{
+        get{
+            return _timeLimit;
+        }
+        set{
+            _timeLimit = value;
+        }
+    }
 
     //Variable to store miniGame position
-    Vector3 gamePosition;
+    Vector3 _gamePosition;
+    //Creating a property for "_gamePosition"
+    public Vector3 GamePosition{get; set;}
 
     //Variable to store miniGame rotation
-    Quaternion gameRotation;
+    Quaternion _gameRotation;
+    //Creating a property for "_gameRotation"
+    public Quaternion GameRotation{get; set;}
 
     //Ray variable for checking if the minigame is active above the tool
     private Ray ray;
@@ -44,10 +57,10 @@ public class ToolScript : MonoBehaviour, IInteractable, IInteractableTool
     //Creating a coroutine that will close the minigame if the player runs out of time
     IEnumerator gameTime(){
 
-        yield return new WaitForSeconds(timeLimit);
+        yield return new WaitForSeconds(TimeLimit);
         gameActive = false;
         Destroy(miniGame);
-        miniGame = Instantiate(dummyGame, gamePosition, gameRotation);
+        miniGame = Instantiate(dummyGame, GamePosition, GameRotation);
         miniGame.SetActive(gameActive);
     }
     
@@ -93,8 +106,8 @@ public class ToolScript : MonoBehaviour, IInteractable, IInteractableTool
     {
 
         //Setting the game position to be referenced later when creating a new instance of the minigame
-        gamePosition = miniGame.transform.position;
-        gameRotation = miniGame.transform.rotation;
+        GamePosition = miniGame.transform.position;
+        GameRotation = miniGame.transform.rotation;
 
        //Setting the game to be off at the start
        miniGame.SetActive(gameActive);

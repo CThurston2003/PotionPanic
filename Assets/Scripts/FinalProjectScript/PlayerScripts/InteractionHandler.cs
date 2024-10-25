@@ -25,7 +25,28 @@ public class InteractionHandler : MonoBehaviour
     [SerializeField] private Transform playerCamera;
 
     //Creating a reach variable to define how far away a player can "reach" an interactable
-    [SerializeField] private float reach = 10f;
+    [SerializeField] private float _reach = 10f;
+    //Creating a property for "_reach"
+    public float Reach{
+        get{
+            return _reach;
+        }
+        set{
+            _reach = value;
+        }
+    } 
+
+    //Creating a variable for the throw power, when a player drops an item
+    [SerializeField] private float _throw = 2;
+    //Creating a property for "_throw"
+    public float Throw{
+        get{
+            return _throw;
+        }
+        set{
+            _throw = value;
+        }
+    }
 
     //Reference to player character controller
     [SerializeField] private CharacterController characterController;
@@ -69,7 +90,7 @@ public class InteractionHandler : MonoBehaviour
 
             //Checking if the raycast hits an object on the interactables layer, within "reach" distance
             //And if it finds an interactable it will trigger the interact method on it, inherited from the IInteractable interface on it
-            if (Physics.Raycast(ray, out RaycastHit hit, reach, interactables)){
+            if (Physics.Raycast(ray, out RaycastHit hit, Reach, interactables)){
                 
                 //If case for interacting with an Interactable Only
                 if(hit.collider.gameObject.TryGetComponent(out IInteractable interactionObj)){
@@ -92,7 +113,7 @@ public class InteractionHandler : MonoBehaviour
         //Sending a ray out from where the players looking to in front of them
         ray = new Ray(playerCamera.position,playerCamera.forward);
         
-        if (Physics.Raycast(ray, out RaycastHit hit, reach, pickUps)){
+        if (Physics.Raycast(ray, out RaycastHit hit, Reach, pickUps)){
 
             //If case for interacting with a pickup
             if(hit.collider.gameObject.TryGetComponent(out IInteractable pickUp) &&
@@ -126,7 +147,7 @@ public class InteractionHandler : MonoBehaviour
 
                 heldObj.transform.SetParent(null);
                 heldObj.GetComponent<Rigidbody>().isKinematic = false;
-                heldObj.GetComponent<Rigidbody>().AddForce(heldObj.transform.forward * 2,ForceMode.Impulse);
+                heldObj.GetComponent<Rigidbody>().AddForce(heldObj.transform.forward * Throw,ForceMode.Impulse);
                 isHolding = false;
 
             }
@@ -134,7 +155,7 @@ public class InteractionHandler : MonoBehaviour
             //Checking if player is clicking F and already holding an item
             //to interact with it
             
-            if (!(Physics.Raycast(ray, out RaycastHit hit2, reach, interactables))){
+            if (!(Physics.Raycast(ray, out RaycastHit hit2, Reach, interactables))){
 
                 if(Input.GetKeyDown("f")){
 
