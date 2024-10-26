@@ -19,7 +19,16 @@ public class PotionScript : MonoBehaviour, IInteractable
     // Blank potion Id will be just 00, so thats the default the potion will start as
     // Temporarily a SerializedField so I can mess with it in play mode
 
-    [SerializeField] private string PotionID = "&00&"; 
+    [SerializeField] private string _PotionID = "&00&"; 
+    //Property for potion ID
+    public string PotionID{
+        get{
+            return _PotionID;
+        }
+        set{
+            _PotionID = value;
+        }
+    }
 
     //Starter Potion IDs
     //BlankPotion: "&00&";
@@ -40,11 +49,53 @@ public class PotionScript : MonoBehaviour, IInteractable
     
 
     //Variables to store colors for potion liquids
-    private Color32 BlankPotion = new Color32(255,255,255,0);
-    private Color32 HealthPotion = new Color32(204,6,29,0);
-    private Color32 StrengthPotion = new Color32(214,91,9,0);
-    private Color32 SpeedPotion = new Color32(15,217,203,0);
-    private Color32 PoisonPotion = new Color32(9,107,35,0);
+    private Color32 _BlankPotion = new Color32(255,255,255,0);
+    private Color32 _HealthPotion = new Color32(204,6,29,0);
+    private Color32 _StrengthPotion = new Color32(214,91,9,0);
+    private Color32 _SpeedPotion = new Color32(15,217,203,0);
+    private Color32 _PoisonPotion = new Color32(9,107,35,0);
+
+    //Properties of potion colors
+    public Color32 BlankPotion{
+        get{
+            return _BlankPotion;
+        }
+        set{
+            _BlankPotion = value;
+        }
+    }
+    public Color32 HealthPotion{
+        get{
+            return _HealthPotion;
+        }
+        set{
+            _HealthPotion = value;
+        }
+    }
+    public Color32 StrengthPotion{
+        get{
+            return _StrengthPotion;
+        }
+        set{
+            _StrengthPotion = value;
+        }
+    }
+    public Color32 SpeedPotion{
+        get{
+            return _SpeedPotion;
+        }
+        set{
+            _SpeedPotion = value;
+        }
+    }
+    public Color32 PoisonPotion{
+        get{
+            return _PoisonPotion;
+        }
+        set{
+            _PoisonPotion = value;
+        }
+    }
 
 
     // Start is called before the first frame update

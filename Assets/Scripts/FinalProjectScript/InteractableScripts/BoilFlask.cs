@@ -18,7 +18,8 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
     
     
     //Variable to store the left & right rotation of the flask
-    private int flaskRotation;
+    private int _flaskRotation;
+    public int FlaskRotation{get; set;}
 
     //Reference to ray used in raycast
     private Ray ray;
@@ -30,16 +31,27 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
     private bool triggerOn = false;
 
     //variable to store how long between each new trigger
-    private int triggerTimer = 5;
+    private int _triggerTimer = 5;
+    public int TriggerTimer{
+        get{
+            return _triggerTimer;
+        }
+        set{
+            _triggerTimer = value;
+        }
+    }
 
     //variable to store the random trigger number
-    private int randTrigger;
+    private int _randTrigger;
+    public int RandTrigger{get; set;}
 
     //variable to store current trigger
     private GameObject currentTrigger;
 
     //Variable to store the players score in
-    private int playerScore = 0;
+    private int _playerScore;
+    public int PlayerScore{get; set;}
+
 
     //Reference to the text part of the Canvas that displays the player's boil score
     [SerializeField] private TMP_Text scoreText;
@@ -69,11 +81,11 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
         if(triggerOn == false){
 
             //Randomly deciding between the 5 triggers
-            randTrigger = Random.Range(1,6);
+            RandTrigger = Random.Range(1,6);
             triggerOn = true;
 
-            //Switch case based on the output of randTrigger
-            switch(randTrigger){
+            //Switch case based on the output of RandTrigger
+            switch(RandTrigger){
 
             case 1:
             currentTrigger = trigger1;
@@ -113,16 +125,16 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
         //Checking if the player is holding the left or right arrow and if they are, 
         //it rotates the flask that direction
         if(Input.GetKey("left")){
-            flaskRotation += 2;
+            FlaskRotation += 2;
         }else if(Input.GetKey("right")){
-            flaskRotation -= 2;
+            FlaskRotation -= 2;
         }
-        this.transform.localRotation = Quaternion.Euler(this.transform.localRotation.x,this.transform.localRotation.y,flaskRotation);
+        this.transform.localRotation = Quaternion.Euler(this.transform.localRotation.x,this.transform.localRotation.y,FlaskRotation);
     
         //Incrementing the score (Will look at this again later, placeholder to show functionality)
         if(Physics.Raycast(ray, out RaycastHit hit, 10, triggerLayer)){
-            playerScore += 1;
-            string score = playerScore.ToString();
+            PlayerScore += 1;
+            string score = PlayerScore.ToString();
             scoreText.text = score;
         }
 
@@ -130,7 +142,7 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
 
     //creating a Coroutine for the lifespan of the trigger
     IEnumerator triggerLife(){
-        yield return new WaitForSeconds(triggerTimer);
+        yield return new WaitForSeconds(TriggerTimer);
         currentTrigger.SetActive(false);
         triggerOn = false;
     }

@@ -23,20 +23,30 @@ public class DoorScript : MonoBehaviour, IInteractable
     }
     
     //Defining the abstract methods from IInteractable interface
-    private int count = 0;
+    private int _count = 0;
+    //creating a property for count
+    public int Count{
+        get{
+            return _count;
+        }
+        set{
+            _count = value;
+        }
+    }
+
     public void Interact(){
         
-        if(count == 0){
+        if(Count == 0){
 
             Debug.Log("Door is Opening");
             doorAnim.SetTrigger("Open");
-            count += 1;
+            Count += 1;
 
-        }else if(count == 1){
+        }else if(Count == 1){
 
             Debug.Log("Door is Closing");
             doorAnim.SetTrigger("Close");
-            count = 0;
+            Count = 0;
 
         }
 

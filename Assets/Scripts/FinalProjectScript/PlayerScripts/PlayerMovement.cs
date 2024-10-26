@@ -23,7 +23,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform playerCamera;
 
     //Movespeed modifier
-    [SerializeField] private float moveSpeed = 1;
+    [SerializeField] private float _moveSpeed = 1;
+    //Making a property for movespeed
+    public float MoveSpeed{
+        get{
+            return _moveSpeed;
+        }
+        set{
+            _moveSpeed = value;
+        }
+    }
 
     //Reference to the PlayerInput object
     [SerializeField] private PlayerInput playerInput;
@@ -34,17 +43,44 @@ public class PlayerMovement : MonoBehaviour
     //Creating an input action object to store the player's jump action in
     [SerializeField] private InputAction jumpAction;
 
-    //Float for gravity (-9.81 is normal gravity)
-    float gravity = -29.43f;
+    //Float for Gravity (-9.81 is normal Gravity)
+    float _gravity = -29.43f;
+    //Making a property for Gravity
+    public float Gravity{
+        get{
+            return _gravity;
+        }
+        set{
+            _gravity = value;
+        }
+    }
 
-    //Vector3 to store the velocity of the player
-    Vector3 velocity;
+    //Vector3 to store the Velocity of the player
+    public Vector3 _velocity;
+    //Making a property for velocity
+    public Vector3 Velocity{
+        get{
+            return _velocity;
+        }
+        set{
+            _velocity = value;
+        }
+    }
 
     //Transform object used to check if the player is on the ground
     [SerializeField] private Transform groundCheck;
 
     //Variable to store the radius distance relating to checking how close the player has to get to be considered grounded
-    [SerializeField] private float groundDis = 0.4f;
+    [SerializeField] private float _groundDis = 0.4f;
+    //Making a property for groundDis
+    public float GroundDis{
+        get{
+            return _groundDis;
+        }
+        set{
+            _groundDis = value;
+        }
+    }
 
     //Layer mask to store all ground objects so the ground check only triggers if it gets close to objects on this layer
     [SerializeField] private LayerMask groundMask;
@@ -53,11 +89,16 @@ public class PlayerMovement : MonoBehaviour
     bool isGrounded;
 
     //Variable to store the height the player can jump too
-    [SerializeField] private float jumpHeight = 3f;
-
-    //Bool to store if player is headBobbing
-    // private bool isBob = false;
-    
+    [SerializeField] private float _jumpHeight = 3f;  
+    //Making a property for jumpHeight
+    public float JumpHeight{
+        get{
+            return _jumpHeight;
+        }
+        set{
+            _jumpHeight = value;
+        }
+    }  
     
     //Awake function
     void Awake(){
@@ -77,21 +118,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    //Creating an IEnumerator function to control headbobbing
-    // private IEnumerator headBob(bool isBob){
-
-    //     if(isBob == true){
-
-    //     //Debug.Log("Up!");
-    //     playerCamera.position = new Vector3(playerCamera.position.x, playerCamera.position.y + 0.1f, playerCamera.position.z);
-    //     yield return new WaitForSecondsRealtime(0.01f);
-    //     playerCamera.position = new Vector3(playerCamera.position.x, playerCamera.position.y - 0.1f, playerCamera.position.z);
-    //     //Debug.Log("Down");
-
-    //     }
-
-    // }
-
     //Fixed Update Function
     void FixedUpdate(){
 
@@ -105,11 +131,11 @@ public class PlayerMovement : MonoBehaviour
 
         //Checking if the player is grounded by using Physics.CheckSphere, it greats a sphere around the specified position, and checks if anything on a specific layer mask crosses into 
         //this circle
-        isGrounded = Physics.CheckSphere(groundCheck.position,groundDis,groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position,GroundDis,groundMask);
 
-        //Checking if the player is grounded and if they are, allow the person to jump by increasing their velocity
+        //Checking if the player is grounded and if they are, allow the person to jump by increasing their Velocity
         if(isGrounded && jumpAction.ReadValue<float>() > 0){
-            velocity.y = Mathf.Sqrt(jumpHeight*(-2)*gravity);
+            _velocity.y = Mathf.Sqrt(JumpHeight*(-2)*Gravity);
         }
 
         //Storing the forward and strafe movements by reading the vector 2 values provided by the moveAction object
@@ -120,18 +146,18 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = transform.right * strafe + transform.forward * forward;
         
         //Moving the character controller using the vector 3 defined above, times the speed modifier times Time.deltaTime
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        controller.Move(move * MoveSpeed * Time.deltaTime);
 
-        //Basic implementation of gravity by just applying a negative downward force multiplied by Time.deltaTime
-        velocity.y += gravity * Time.deltaTime;
+        //Basic implementation of Gravity by just applying a negative downward force multiplied by Time.deltaTime
+        _velocity.y += Gravity * Time.deltaTime;
 
-        //Resetting the velocity whenever the player is grounded so velocity isn't forever building up
-        if(isGrounded && velocity.y < 0){
-            velocity.y = -2.0f;
+        //Resetting the Velocity whenever the player is grounded so Velocity isn't forever building up
+        if(isGrounded && _velocity.y < 0){
+            _velocity.y = -2.0f;
         }
 
-        //applying gravity to the player using the character controller move method        
-        controller.Move(velocity*Time.deltaTime);
+        //applying Gravity to the player using the character controller move method        
+        controller.Move(_velocity*Time.deltaTime);
 
         //If statement to read if the player is moving by reading their x and z value
         if(move.x != 0 || move.z != 0){
@@ -144,20 +170,11 @@ public class PlayerMovement : MonoBehaviour
             headBob.SetFloat("Bob2",0f);
 
         }
-        // else{
-
-        //     isBob = false;
-
-        // }
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        // Debug.Log(isBob);
-        // StartCoroutine(headBob(isBob));
 
     }
 }

@@ -13,18 +13,41 @@ public class MouseLook : MonoBehaviour
 
     //------------------------------Variables Section-------------------------------------------
 
-    [SerializeField] private float mouseSensitivity = 1f; //Variable to control mouse sensitivity
+    [SerializeField] private float _mouseSensitivity = 1f; //Variable to control mouse sensitivity
+    //Making mouseSensitivity property
+    public float MouseSensitivity{
+        get{
+            return _mouseSensitivity;
+        }
+        set{
+            _mouseSensitivity = value;
+        }
+    }
 
     [SerializeField] private Transform player; //reference to players body
 
-    private float xRotation = 0f; //Rotation value to apply to players transform to rotate around the y axis
+    private float _xRotation = 0f; //Rotation value to apply to players transform to rotate around the y axis
+    //Making the XRotation property
+    public float XRotation{
+        get{
+            return _xRotation;
+        }
+        set{
+            if(value >= -90f && value <= 90f){
+                _xRotation = value;
+            }
+        }
+    }
 
     [SerializeField] private PlayerInput playerInput; //reference to player input object
     private InputAction lookAction; //Creating object to store look input actions in
     
-    //floats to store the mouseX and Y values from the mouse
-    private float mouseX;
-    private float mouseY;
+    //floats to store the MouseX and Y values from the mouse
+    private float _mouseX;
+    private float _mouseY;
+    //Properties for mouseX and mousey
+    public float MouseX{get; set;}
+    public float MouseY{get; set;}
 
     //Awake function
     void Awake(){
@@ -49,18 +72,17 @@ public class MouseLook : MonoBehaviour
     public void mouseLook(){
 
         //Storing vector 2 values corresponding to the x and y that the player is looking
-        mouseX = lookAction.ReadValue<Vector2>().x * mouseSensitivity;
-        mouseY = lookAction.ReadValue<Vector2>().y * mouseSensitivity;
+        MouseX = lookAction.ReadValue<Vector2>().x * MouseSensitivity;
+        MouseY = lookAction.ReadValue<Vector2>().y * MouseSensitivity;
         
         
         //Storing the value of Y to correspond to rotation along the y axis, so rotating left and right
-        xRotation -= mouseY;
+        XRotation -= MouseY;
         //Clamping the values so the player cant look farther than 90 degrees up or down
-        xRotation = Mathf.Clamp(xRotation,-90f,90f);
 
         //Rotating the camera by rotating its transform component relative to its current position, and rotating the players body using a vector 3 value passed into the Rotate function
-        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-        player.Rotate(Vector3.up * mouseX);
+        transform.localRotation = Quaternion.Euler(XRotation, 0f, 0f);
+        player.Rotate(Vector3.up * MouseX);
 
     }
 
