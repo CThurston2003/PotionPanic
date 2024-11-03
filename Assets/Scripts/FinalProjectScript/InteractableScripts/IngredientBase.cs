@@ -18,7 +18,7 @@ public class IngredientBase : MonoBehaviour, IInteractable, IIngredient
     //Interact Method
     public void Interact(){
 
-
+        Debug.Log(this.GetComponent<MultiTag>().GetAtIndex(0));
 
     }
 

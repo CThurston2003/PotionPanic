@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7897433364797553107}
   - component: {fileID: 3934997975467463192}
   - component: {fileID: 4660856312930927672}
+  - component: {fileID: 3569023946207152607}
   m_Layer: 13
   m_Name: Tree Leaf
   m_TagString: Untagged
@@ -97,6 +98,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3569023946207152607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873495107380080757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618208f92b11df8489f48ed8608f0ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - Roast
+  - Grind
 --- !u!1 &2213957775949031276
 GameObject:
   m_ObjectHideFlags: 0

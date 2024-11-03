@@ -63,6 +63,9 @@ public class InteractionHandler : MonoBehaviour
     //bool for keeping track if player is holding something
     private bool isHolding = false;
 
+    // //creating an object to store the held obj
+    // GameObject heldObj;
+
     
     //Awake function
     void Awake()
@@ -99,6 +102,8 @@ public class InteractionHandler : MonoBehaviour
                     //Also making sure that if the player has an ingredient and interacts with it, it treats it accordingly
                     if(hit.collider.gameObject.TryGetComponent(out IInteractableTool interactionTool) && holdPosition.childCount > 1){
                         interactionTool.InteractTool(true);
+                        Destroy(holdPosObj.transform.GetChild(1).gameObject);
+                        isHolding = false;
                     }else{
                         interactionObj.Interact();
                     }
@@ -137,7 +142,7 @@ public class InteractionHandler : MonoBehaviour
 
         //Checking if the holdPosition has an object as a child (its 1 because theres a sphere for easy positioning in scene view)
         if(holdPosition.childCount > 1){
-
+            
             //Assigning the gameObject thats currently being held to heldObj
             GameObject heldObj = holdPosObj.transform.GetChild(1).gameObject;
             
