@@ -101,9 +101,12 @@ public class InteractionHandler : MonoBehaviour
                     //Checking if the interactable is specifically a tool for alchemy, and if not, just interacting with it
                     //Also making sure that if the player has an ingredient and interacts with it, it treats it accordingly
                     if(hit.collider.gameObject.TryGetComponent(out IInteractableTool interactionTool) && holdPosition.childCount > 1){
-                        interactionTool.InteractTool(true);
-                        Destroy(holdPosObj.transform.GetChild(1).gameObject);
-                        isHolding = false;
+                        //Checking if the object that the player is holding, is an ingredient
+                        if(holdPosObj.transform.GetChild(1).gameObject.TryGetComponent<MultiTag>(out MultiTag tag) && tag.HasTags("Ingredient")){
+                            interactionTool.InteractTool(true);
+                            Destroy(holdPosObj.transform.GetChild(1).gameObject);
+                            isHolding = false;
+                        }
                     }else{
                         interactionObj.Interact();
                     }

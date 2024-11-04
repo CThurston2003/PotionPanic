@@ -195,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tags:
   - Boil
+  - Ingredient
 --- !u!1 &6502851788385606277
 GameObject:
   m_ObjectHideFlags: 0

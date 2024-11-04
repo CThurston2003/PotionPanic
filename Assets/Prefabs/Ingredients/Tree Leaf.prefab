@@ -113,6 +113,7 @@ MonoBehaviour:
   tags:
   - Roast
   - Grind
+  - Ingredient
 --- !u!1 &2213957775949031276
 GameObject:
   m_ObjectHideFlags: 0
