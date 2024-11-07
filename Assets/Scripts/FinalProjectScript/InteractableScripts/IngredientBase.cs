@@ -18,7 +18,8 @@ public class IngredientBase : MonoBehaviour, IInteractable, IIngredient
     //Interact Method
     public void Interact(){
 
-        Debug.Log(this.GetComponent<MultiTag>().GetAtIndex(0));
+        //Testing the multitag system to see if the console actually outputs true because this object has the Holdable tag
+        Debug.Log(this.GetComponent<MultiTag>().HasTags("Holdable"));
 
     }
 

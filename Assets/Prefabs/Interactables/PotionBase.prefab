@@ -119,8 +119,9 @@ GameObject:
   - component: {fileID: 6240542617479783023}
   - component: {fileID: 6923058999350112729}
   - component: {fileID: 6858031211605122141}
+  - component: {fileID: 8831031610678651860}
   m_Layer: 13
-  m_Name: Potion 1 1
+  m_Name: PotionBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 321752415818e39478a21e2e7436c455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PotionID: '&04&'
+  _PotionID: '&00&'
   holdPosition: {fileID: 0}
 --- !u!54 &6858031211605122141
 Rigidbody:
@@ -206,6 +207,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8831031610678651860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2966735852617949463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 618208f92b11df8489f48ed8608f0ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags:
+  - Potion
 --- !u!1 &4896144205748713229
 GameObject:
   m_ObjectHideFlags: 0
