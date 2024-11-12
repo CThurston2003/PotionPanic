@@ -8,6 +8,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Required Components
+[RequireComponent(typeof(MultiTag))] //Required Multitag
+[RequireComponent(typeof(Rigidbody))] //Required Rigibody
+
 public class PotionScript : MonoBehaviour, IInteractable
 {
     
@@ -118,18 +122,22 @@ public class PotionScript : MonoBehaviour, IInteractable
 
             case "&01&":
                 potionLiquid.GetComponent<Renderer>().material.color = HealthPotion;
+                this.GetComponent<MultiTag>().Rename(0,"HealthPotion");
                 break;
 
             case "&02&":
                 potionLiquid.GetComponent<Renderer>().material.color = StrengthPotion;
+                this.GetComponent<MultiTag>().Rename(0,"StrengthPotion");
                 break;
 
             case "&03&":
                 potionLiquid.GetComponent<Renderer>().material.color = SpeedPotion;
+                this.GetComponent<MultiTag>().Rename(0,"SpeedPotion");
                 break;
 
             case "&04&":
                 potionLiquid.GetComponent<Renderer>().material.color = PoisonPotion;
+                this.GetComponent<MultiTag>().Rename(0,"PoisonPotion");
                 break;
 
             default: 

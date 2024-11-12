@@ -220,11 +220,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags:
+  - BlankPotion
   - Potion
   - Interactable
   - Holdable
   - Result
-  - BlankPotion
 --- !u!1 &4896144205748713229
 GameObject:
   m_ObjectHideFlags: 0

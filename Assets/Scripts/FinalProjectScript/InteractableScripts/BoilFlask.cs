@@ -16,7 +16,6 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
     //Reference to the fire
     [SerializeField] private GameObject fire;
     
-    
     //Variable to store the left & right rotation of the flask
     private int _flaskRotation;
     public int FlaskRotation{get; set;}
@@ -63,9 +62,19 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
     [SerializeField] private GameObject trigger4;
     [SerializeField] private GameObject trigger5;
 
-    //List to store the triggers in
+    //Position for the resulting ingredient or object to be dropped at
+    [SerializeField] private Transform outputPosition;
 
+    //Blank potion to be instantiated based on the player reaching the needed score
+    [SerializeField] private GameObject BlankPotion;
 
+    //Bool to keep track if a result was spit out
+    private bool gotResult = false;
+
+    //Setting the Used Ingredient 
+    public GameObject Ingredient;
+    
+    
     //Defining abstract methods inherited from interface
     
     //From IInteractable, possible how the player puts the ingredients in the flask
@@ -74,9 +83,54 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
 
     }
 
-    //MiniRun abstract method
-    public void MiniRun(){
+    //function to set potion (and later ingredients instead) attributes
+    public void SetAttributes(GameObject Potion, GameObject Ingredient){
+        
+        //String to store the name of the ingredient
+        string ingredientName = Ingredient.GetComponent<MultiTag>().GetAtIndex(1);
+        string potionType;
 
+        //Switch case for assigning the potion attributes based 
+        switch(ingredientName){
+
+            case "Mint":
+            potionType = "&01&";
+            Potion.GetComponent<PotionScript>().PotionID = potionType;
+            break;
+            
+            case "TreeLeaf":
+            potionType = "&02&";
+            Potion.GetComponent<PotionScript>().PotionID = potionType;
+            break;
+
+            case "Alcohol":
+            potionType = "&03&";
+            Potion.GetComponent<PotionScript>().PotionID = potionType;
+            break;
+
+            case "Water":
+            potionType = "&04&";
+            Potion.GetComponent<PotionScript>().PotionID = potionType;
+            break;
+
+            case "Clay":
+            potionType = "&00&";
+            Potion.GetComponent<PotionScript>().PotionID = potionType;
+            break;
+
+        }
+
+        
+        
+
+    }
+
+    //MiniRun abstract method
+    public void MiniRun(GameObject usedIngredient){
+
+        //Assigning the used ingredient
+        usedIngredient = Ingredient;
+        
         //deciding a new trigger to turn on based on if theres not any triggers on currently
         if(triggerOn == false){
 
@@ -136,6 +190,19 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
             PlayerScore += 1;
             string score = PlayerScore.ToString();
             scoreText.text = score;
+        }
+
+        //Creating a condition to spawn the required ingredient when the score reaches the specified threshold
+        if(PlayerScore >= 100 && gotResult == false){
+
+            Debug.Log("Spit out a potion!");
+            gotResult = true;
+            GameObject newPotion = Instantiate(BlankPotion);
+            newPotion.transform.position = outputPosition.position;
+
+            //Setting the Potion/Ingredient Attributes
+            SetAttributes(newPotion, Ingredient);
+
         }
 
     }

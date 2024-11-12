@@ -220,11 +220,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags:
+  - SpeedPotion
   - Potion
   - Interactable
   - Holdable
   - Result
-  - SpeedPotion
 --- !u!1 &4896144205748713229
 GameObject:
   m_ObjectHideFlags: 0

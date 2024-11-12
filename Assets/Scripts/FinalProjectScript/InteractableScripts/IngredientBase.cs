@@ -8,6 +8,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Required Components
+[RequireComponent(typeof(MultiTag))] //Required Multitag
+[RequireComponent(typeof(Rigidbody))] //Required Rigidbody
+
+
 public class IngredientBase : MonoBehaviour, IInteractable, IIngredient
 {
     //------------------Variable Section--------------

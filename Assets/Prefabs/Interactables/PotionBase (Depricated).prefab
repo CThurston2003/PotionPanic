@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 6858031211605122141}
   - component: {fileID: 8831031610678651860}
   m_Layer: 13
-  m_Name: PotionBase
+  m_Name: PotionBase (Depricated)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -63,22 +63,6 @@ public class InteractionHandler : MonoBehaviour
     //bool for keeping track if player is holding something
     private bool isHolding = false;
 
-    // //creating an object to store the held obj
-    // GameObject heldObj;
-
-    
-    //Awake function
-    void Awake()
-    {
-
-    }
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
 
     //Function to deal with sending a ray to check if a player is trying to interact with an interactable object
     public void interactCheck(){
@@ -96,19 +80,23 @@ public class InteractionHandler : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, Reach, interactables)){
                 
                 //If case for interacting with an Interactable Only
-                if(hit.collider.gameObject.TryGetComponent(out IInteractable interactionObj)){
+                if(hit.collider.gameObject.TryGetComponent(out MultiTag InteractTag) && InteractTag.HasTags("Interactable")){
                     
                     //Checking if the interactable is specifically a tool for alchemy, and if not, just interacting with it
                     //Also making sure that if the player has an ingredient and interacts with it, it treats it accordingly
-                    if(hit.collider.gameObject.TryGetComponent(out IInteractableTool interactionTool) && holdPosition.childCount > 1){
+                    if(InteractTag.HasTags("Tool") && holdPosition.childCount > 1){
                         //Checking if the object that the player is holding, is an ingredient
                         if(holdPosObj.transform.GetChild(1).gameObject.TryGetComponent<MultiTag>(out MultiTag tag) && tag.HasTags("Ingredient")){
-                            interactionTool.InteractTool(true);
+                            Debug.Log("Testingggg");
+                            hit.collider.gameObject.GetComponent<IInteractableTool>().InteractTool(holdPosObj);
                             Destroy(holdPosObj.transform.GetChild(1).gameObject);
                             isHolding = false;
                         }
+                        else{
+                            hit.collider.gameObject.GetComponent<IInteractable>().Interact();
+                        }
                     }else{
-                        interactionObj.Interact();
+                        hit.collider.gameObject.GetComponent<IInteractable>().Interact();
                     }
                 }
             }
@@ -123,18 +111,20 @@ public class InteractionHandler : MonoBehaviour
         
         if (Physics.Raycast(ray, out RaycastHit hit, Reach, pickUps)){
 
+            GameObject pickUpObj = hit.collider.gameObject;
+
             //If case for interacting with a pickup
-            if(hit.collider.gameObject.TryGetComponent(out IInteractable pickUp) &&
-            hit.collider.gameObject.TryGetComponent(out Transform pickUpObj)){
+            if(pickUpObj.TryGetComponent(out MultiTag tagged) &&
+            tagged.HasTags("Holdable")){
 
                 //Checking if mouse is down and player is not currently holding something
                 //Picking up the item if thats the case
                 if(Input.GetMouseButtonDown(0) && isHolding == false){
 
-                    pickUpObj.position = holdPosition.position;
-                    pickUpObj.SetParent(holdPosition);
+                    pickUpObj.transform.position = holdPosition.position;
+                    pickUpObj.transform.SetParent(holdPosition);
                     pickUpObj.transform.localRotation = new Quaternion(0,180,0,0);
-                    hit.collider.gameObject.TryGetComponent(out Rigidbody rb);
+                    pickUpObj.TryGetComponent(out Rigidbody rb);
                     rb.isKinematic = true;
 
                     isHolding = true;
@@ -167,9 +157,9 @@ public class InteractionHandler : MonoBehaviour
 
                 if(Input.GetKeyDown("f")){
 
-                //Calling the interact function
-                heldObj.TryGetComponent(out IInteractable intObj);
-                intObj.Interact();
+                    //Calling the interact function
+                    heldObj.GetComponent<IInteractable>().Interact();
+                    //intObj.Interact();
 
                 }
             }

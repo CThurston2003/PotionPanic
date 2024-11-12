@@ -53,11 +53,16 @@ public class ToolScript : MonoBehaviour, IInteractable, IInteractableTool
     //Variable to keep track of if the player clicked on the tool with an ingredient in hand
     private bool hasIngredient;
 
+    //GameObject to store the ingredient the player used
+    public GameObject usedIngredient;
+
     
     //Creating a coroutine that will close the minigame if the player runs out of time
     IEnumerator gameTime(){
 
         yield return new WaitForSeconds(TimeLimit);
+        
+        
         gameActive = false;
         Destroy(miniGame);
         miniGame = Instantiate(dummyGame, GamePosition, GameRotation);
@@ -83,10 +88,13 @@ public class ToolScript : MonoBehaviour, IInteractable, IInteractableTool
     //This InteractTool method acts as showing the "Active" version of the minigame
     //The version of the minigame that shows when the player interacts with it while actually holding an ingredient
     //and that starts the minigame
-    public void InteractTool(bool ingredient){
+    public void InteractTool(GameObject ingredient){
 
+        //Assigning the used ingredient
+        usedIngredient = ingredient;
+        
         //Code to change the bool hasIngredient based on if the player interacted while holding an ingredient
-        if(ingredient == true){
+        if(ingredient){
             hasIngredient = true;
         }
 
@@ -133,7 +141,7 @@ public class ToolScript : MonoBehaviour, IInteractable, IInteractableTool
                 
                     //Running the MiniRun command from the object if it does, but only if the player has an ingredient
                     if(hasIngredient == true){
-                        miniObj.MiniRun();
+                        miniObj.MiniRun(usedIngredient);
                     }
                 }
             }
