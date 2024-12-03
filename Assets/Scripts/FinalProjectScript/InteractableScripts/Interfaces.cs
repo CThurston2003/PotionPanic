@@ -19,7 +19,7 @@ public interface IInteractable{
 public interface IInteractableTool{
 
     //Abstract methods
-    public void InteractTool(GameObject ingredient);
+    public void InteractTool(bool passBool);
 
 }
 
@@ -27,7 +27,7 @@ public interface IInteractableTool{
 public interface IMiniObject{
 
     //abstract methods
-    public void MiniRun(GameObject Ingredient);
+    public void MiniRun();
 
 }
 

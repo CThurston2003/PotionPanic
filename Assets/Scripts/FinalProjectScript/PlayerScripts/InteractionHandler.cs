@@ -88,7 +88,7 @@ public class InteractionHandler : MonoBehaviour
                         //Checking if the object that the player is holding, is an ingredient
                         if(holdPosObj.transform.GetChild(1).gameObject.TryGetComponent<MultiTag>(out MultiTag tag) && tag.HasTags("Ingredient")){
                             Debug.Log("Testingggg");
-                            hit.collider.gameObject.GetComponent<IInteractableTool>().InteractTool(holdPosObj);
+                            hit.collider.gameObject.GetComponent<IInteractableTool>().InteractTool(true);
                             Destroy(holdPosObj.transform.GetChild(1).gameObject);
                             isHolding = false;
                         }

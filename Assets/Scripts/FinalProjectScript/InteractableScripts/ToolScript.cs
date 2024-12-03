@@ -88,15 +88,17 @@ public class ToolScript : MonoBehaviour, IInteractable, IInteractableTool
     //This InteractTool method acts as showing the "Active" version of the minigame
     //The version of the minigame that shows when the player interacts with it while actually holding an ingredient
     //and that starts the minigame
-    public void InteractTool(GameObject ingredient){
+    public void InteractTool(bool passBool){
 
         //Assigning the used ingredient
-        usedIngredient = ingredient;
+        //usedIngredient = ingredient;
+
+        hasIngredient = passBool;
         
         //Code to change the bool hasIngredient based on if the player interacted while holding an ingredient
-        if(ingredient){
-            hasIngredient = true;
-        }
+        // if(ingredient){
+        //     hasIngredient = true;
+        // }
 
         //Code to toggle on or off the minigame when the player interacts with it
         gameActive = !gameActive;
@@ -139,9 +141,10 @@ public class ToolScript : MonoBehaviour, IInteractable, IInteractableTool
                 //Checking if the specific index in the Raycast array has the IMiniObject interface
                 if(hits[i].collider.gameObject.TryGetComponent(out IMiniObject miniObj)){
                 
+                    
                     //Running the MiniRun command from the object if it does, but only if the player has an ingredient
                     if(hasIngredient == true){
-                        miniObj.MiniRun(usedIngredient);
+                        miniObj.MiniRun();
                     }
                 }
             }
