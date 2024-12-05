@@ -87,7 +87,9 @@ public class InteractionHandler : MonoBehaviour
                     if(InteractTag.HasTags("Tool") && holdPosition.childCount > 1){
                         //Checking if the object that the player is holding, is an ingredient
                         if(holdPosObj.transform.GetChild(1).gameObject.TryGetComponent<MultiTag>(out MultiTag tag) && tag.HasTags("Ingredient")){
-                            Debug.Log("Testingggg");
+                            //Debug.Log("Testingggg");
+                            string ingredientUsed = tag.GetAtIndex(1);
+                            InteractTag.AddTo(0,ingredientUsed);
                             hit.collider.gameObject.GetComponent<IInteractableTool>().InteractTool(true);
                             Destroy(holdPosObj.transform.GetChild(1).gameObject);
                             isHolding = false;

@@ -13,6 +13,9 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
 {
     //-------------Variables Section------------------
 
+    //Reference to the tool that the flask is on top of
+    [SerializeField] private GameObject boilTool;
+    
     //Reference to the fire
     [SerializeField] private GameObject fire;
     
@@ -71,10 +74,19 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
     //Bool to keep track if a result was spit out
     private bool gotResult = false;
 
-    //Setting the Used Ingredient 
-    private GameObject Ingredient;
+    //Setting the Used Ingredient by checking the first tag of the tool the boil flask is attached too
+    private string ingredient;
     
     
+    public void Start(){
+
+        //Assigning the used ingredient
+        ingredient = boilTool.GetComponent<MultiTag>().GetAtIndex(0);
+        boilTool.GetComponent<MultiTag>().DeleteFrom(0);
+
+    }
+
+
     //Defining abstract methods inherited from interface
     
     //From IInteractable, possible how the player puts the ingredients in the flask
@@ -128,8 +140,7 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
     //MiniRun abstract method
     public void MiniRun(){
 
-        //Assigning the used ingredient
-        //usedIngredient = Ingredient;
+        Debug.Log(ingredient);
         
         //deciding a new trigger to turn on based on if theres not any triggers on currently
         if(triggerOn == false){

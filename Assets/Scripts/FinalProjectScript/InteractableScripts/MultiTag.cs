@@ -36,5 +36,19 @@ public class MultiTag : MonoBehaviour
     public string GetAtIndex(int index){
         return tags[index];
     }
+
+    //Property to add a tag to a multitag list
+    public void AddTo(int index, string newTag){
+
+        tags.Insert(index, newTag);
+
+    }
+
+    //Property to delete a tag from a multitag list(At the front)
+    public void DeleteFrom(int index){
+
+        tags.RemoveAt(index);
+
+    }
     
 }

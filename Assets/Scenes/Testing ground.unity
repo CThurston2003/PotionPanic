@@ -1036,18 +1036,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BoilingMiniGame 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6568439895162432027, guid: ef7f3601cc74d074db31cf08a641ab6d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.584
-      objectReference: {fileID: 0}
-    - target: {fileID: 6568439895162432027, guid: ef7f3601cc74d074db31cf08a641ab6d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.866
-      objectReference: {fileID: 0}
-    - target: {fileID: 6568439895162432027, guid: ef7f3601cc74d074db31cf08a641ab6d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.274
-      objectReference: {fileID: 0}
+    - target: {fileID: 7547478506301322340, guid: ef7f3601cc74d074db31cf08a641ab6d, type: 3}
+      propertyPath: boilTool
+      value: 
+      objectReference: {fileID: 1290788225}
     - target: {fileID: 8787536485840798188, guid: ef7f3601cc74d074db31cf08a641ab6d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.113
@@ -2706,6 +2698,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1290788225 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6534497140602101040, guid: f1b24041a0190aa4a865cb3b7c1db4e2, type: 3}
+  m_PrefabInstance: {fileID: 1808862359}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1302552771
 GameObject:
   m_ObjectHideFlags: 0
