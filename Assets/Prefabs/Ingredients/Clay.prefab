@@ -116,7 +116,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tags:
   - Grind
+  - Clay
   - Ingredient
+  - Holdable
 --- !u!1 &3088257337564774282
 GameObject:
   m_ObjectHideFlags: 0

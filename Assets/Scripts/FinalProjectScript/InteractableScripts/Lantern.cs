@@ -21,14 +21,14 @@ public class Lantern : MonoBehaviour, IInteractable
     [SerializeField] private GameObject lightGlow;
 
     //Bool to keep track of the lights state
-    private bool lightOn = true;
+    private bool lightOn = false;
     
     
     // Start is called before the first frame update
     void Start()
     {
         
-
+        lightGlow.SetActive(lightOn);
 
     }
 

@@ -278,7 +278,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tags:
   - Boil
+  - Alcohol
   - Ingredient
+  - Holdable
 --- !u!1 &5655790926963502786
 GameObject:
   m_ObjectHideFlags: 0

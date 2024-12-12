@@ -112,8 +112,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tags:
   - Roast
+  - Mint
   - Grind
   - Ingredient
+  - Holdable
 --- !u!1 &1971211397389286015
 GameObject:
   m_ObjectHideFlags: 0
