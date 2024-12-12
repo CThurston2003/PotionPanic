@@ -77,15 +77,36 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
     //Setting the Used Ingredient by checking the first tag of the tool the boil flask is attached too
     private string ingredient;
     
+    //bool to determine if the first index was turned to the stored ingredient
+    private bool changeIng = false;
+    
     
     public void Start(){
 
         //Assigning the used ingredient
         ingredient = boilTool.GetComponent<MultiTag>().GetAtIndex(0);
-        boilTool.GetComponent<MultiTag>().DeleteFrom(0);
+        //delIngredient = false;
+
+
 
     }
 
+
+    public void Update(){
+
+        if(gotResult == true && changeIng == false){
+            boilTool.GetComponent<MultiTag>().Rename(0, ingredient);
+            changeIng = true;
+        }
+
+        if(changeIng == true){
+
+            boilTool.GetComponent<MultiTag>().Rename(0, "Tool");
+            changeIng = false;
+
+        }
+
+    }
 
     //Defining abstract methods inherited from interface
     
@@ -140,7 +161,7 @@ public class BoilFlask : MonoBehaviour, IInteractable, IMiniObject
     //MiniRun abstract method
     public void MiniRun(){
 
-        Debug.Log(ingredient);
+        //Debug.Log(delIngredient);
         
         //deciding a new trigger to turn on based on if theres not any triggers on currently
         if(triggerOn == false){

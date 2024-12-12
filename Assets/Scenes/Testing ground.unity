@@ -3862,6 +3862,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3476474313431000382, guid: f1b24041a0190aa4a865cb3b7c1db4e2, type: 3}
+      propertyPath: tags.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476474313431000382, guid: f1b24041a0190aa4a865cb3b7c1db4e2, type: 3}
+      propertyPath: tags.Array.data[0]
+      value: Tool
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476474313431000382, guid: f1b24041a0190aa4a865cb3b7c1db4e2, type: 3}
+      propertyPath: tags.Array.data[1]
+      value: Interactable
+      objectReference: {fileID: 0}
     - target: {fileID: 6534497140602101040, guid: f1b24041a0190aa4a865cb3b7c1db4e2, type: 3}
       propertyPath: m_Name
       value: Pot_01

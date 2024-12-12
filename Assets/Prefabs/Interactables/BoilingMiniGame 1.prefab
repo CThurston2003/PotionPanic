@@ -1530,7 +1530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb56ada8c5e486843895615fa8350b30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boilTool: {fileID: 0}
+  boilTool: {fileID: 6534497140602101040, guid: f1b24041a0190aa4a865cb3b7c1db4e2, type: 3}
   fire: {fileID: 1979737306124654439}
   triggerLayer:
     serializedVersion: 2
